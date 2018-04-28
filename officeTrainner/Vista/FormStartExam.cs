@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace Vista
+﻿namespace Vista
 {
+    using System;
+    using System.Windows.Forms;
+
     public partial class FormStartExam : Form
     {
         public FormStartExam()
@@ -23,13 +16,16 @@ namespace Vista
 
             int Width = screen.Bounds.Width;
             int Height = screen.Bounds.Height;
-            //MessageBox.Show(Convert.ToString(Height));
-            FormQuestionsPanel form1 = new FormQuestionsPanel();
+            
+            FormQuestionsPanel formQuestionsPanel = new FormQuestionsPanel();
 
-            form1.StartPosition = FormStartPosition.Manual;
-            form1.Left = 0;
-            form1.Top = Height - 180;
-            form1.ShowDialog();
+            formQuestionsPanel.StartPosition = FormStartPosition.Manual;
+            formQuestionsPanel.Left = 0;
+            formQuestionsPanel.Top = Height - 180;
+            formQuestionsPanel.Width = Width;
+            formQuestionsPanel.ShowDialog();
+
+            
         }
     }
 }
