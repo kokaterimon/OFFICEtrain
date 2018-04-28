@@ -16,5 +16,20 @@ namespace Vista
         {
             InitializeComponent();
         }
+
+        private void bunifuFlatButton1_Click(object sender, EventArgs e)
+        {
+            Screen screen = Screen.PrimaryScreen;
+
+            int Width = screen.Bounds.Width;
+            int Height = screen.Bounds.Height;
+            //MessageBox.Show(Convert.ToString(Height));
+            FormQuestionsPanel form1 = new FormQuestionsPanel();
+
+            form1.StartPosition = FormStartPosition.Manual;
+            form1.Left = 0;
+            form1.Top = Height - 180;
+            form1.ShowDialog();
+        }
     }
 }

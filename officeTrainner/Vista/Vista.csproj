@@ -55,6 +55,12 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormQuestionsPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormQuestionsPanel.Designer.cs">
+      <DependentUpon>FormQuestionsPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormStartExam.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +71,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormQuestionsPanel.resx">
+      <DependentUpon>FormQuestionsPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormStartExam.resx">
       <DependentUpon>FormStartExam.cs</DependentUpon>

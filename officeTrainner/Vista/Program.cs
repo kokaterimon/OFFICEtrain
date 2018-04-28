@@ -18,6 +18,7 @@ namespace Vista
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new FormMain());
             Application.Run(new FormStartExam());
+            //Application.Run(new FormQuestionsPanel());
         }
     }
 }
