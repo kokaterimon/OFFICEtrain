@@ -33,5 +33,11 @@ namespace Vista
             ObjExcel.ActiveWindow.Left = 0;
             ObjExcel.ActiveWindow.Top = 0;
         }
+
+        private void BtnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            //Application.Exit();
+        }
     }
 }
