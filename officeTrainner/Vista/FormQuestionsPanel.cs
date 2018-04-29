@@ -25,7 +25,7 @@ namespace Vista
             ObjExcel.Visible = true;
 
             //La razón entre la resolución del office y la pantalla es: 811/1080=office/screen
-            int newHeightScreen = HeightScreen - HeightScreen * 180/1080;
+            int newHeightScreen = HeightScreen - HeightScreen * 200/1080;
 
             ObjExcel.Workbooks.Open(ruta);
             ObjExcel.ActiveWindow.Height = 811*newHeightScreen/1080;

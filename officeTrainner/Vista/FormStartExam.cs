@@ -23,9 +23,10 @@
             formQuestionsPanel.StartPosition = FormStartPosition.Manual;
             formQuestionsPanel.Left = 0;
             //formQuestionsPanel.Top = Height - 180; //BR: No tomaremos una medida fija, sino que será proporcional a la resolución de ptantalla
-            formQuestionsPanel.Top = HeightScreen - HeightScreen * 180/1080;
+            formQuestionsPanel.Top = HeightScreen - HeightScreen * 200/1080;
             formQuestionsPanel.Width = WidthScreen;
-            formQuestionsPanel.Height = HeightScreen * 180 / 1080;
+            formQuestionsPanel.Height = HeightScreen * 200 / 1080;
+
             formQuestionsPanel.ShowDialog();
 
             
