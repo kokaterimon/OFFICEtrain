@@ -17,10 +17,8 @@ namespace Datos
         public int IdExamen { get; set; }
         public string NombreExamen { get; set; }
         public System.DateTime fecha { get; set; }
-        public Nullable<int> Avance { get; set; }
+        public int Avance { get; set; }
         public int AlumnoIdAlumno { get; set; }
-        public string NumeroDePreguntas { get; set; }
-    
-        public virtual DetalleExamen DetalleExaman { get; set; }
+        public int NumeroDePreguntas { get; set; }
     }
 }

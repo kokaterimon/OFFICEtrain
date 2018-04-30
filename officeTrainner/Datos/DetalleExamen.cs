@@ -55,5 +55,6 @@ namespace Datos
         public string Pregunta38 { get; set; }
         public string Pregunta39 { get; set; }
         public string Pregunta40 { get; set; }
+        public int ExamenIdExamen { get; set; }
     }
 }

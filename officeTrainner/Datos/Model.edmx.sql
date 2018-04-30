@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/30/2018 14:10:38
+-- Date Created: 04/30/2018 17:04:34
 -- Generated from EDMX file: C:\OFFICEtrainer\officeTrainner\Datos\Model.edmx
 -- --------------------------------------------------
 
@@ -55,56 +55,56 @@ CREATE TABLE [dbo].[Examenes] (
     [IdExamen] int IDENTITY(1,1) NOT NULL,
     [NombreExamen] nvarchar(max)  NOT NULL,
     [fecha] datetime  NOT NULL,
-    [Avance] int  NULL,
+    [Avance] int  NOT NULL,
     [AlumnoIdAlumno] int  NOT NULL,
-    [NumeroDePreguntas] nvarchar(max)  NOT NULL,
-    [DetalleExaman_IdDetalleExamen] int  NOT NULL
+    [NumeroDePreguntas] int  NOT NULL
 );
 GO
 
 -- Creating table 'DetalleExamenes'
 CREATE TABLE [dbo].[DetalleExamenes] (
     [IdDetalleExamen] int IDENTITY(1,1) NOT NULL,
-    [Pregunta1] nvarchar(max)  NOT NULL,
-    [Pregunta2] nvarchar(max)  NOT NULL,
-    [Pregunta3] nvarchar(max)  NOT NULL,
-    [Pregunta4] nvarchar(max)  NOT NULL,
-    [Pregunta5] nvarchar(max)  NOT NULL,
-    [Pregunta6] nvarchar(max)  NOT NULL,
-    [Pregunta7] nvarchar(max)  NOT NULL,
-    [Pregunta8] nvarchar(max)  NOT NULL,
-    [Pregunta9] nvarchar(max)  NOT NULL,
-    [Pregunta10] nvarchar(max)  NOT NULL,
-    [Pregunta11] nvarchar(max)  NOT NULL,
-    [Pregunta12] nvarchar(max)  NOT NULL,
-    [Pregunta13] nvarchar(max)  NOT NULL,
-    [Pregunta14] nvarchar(max)  NOT NULL,
-    [Pregunta15] nvarchar(max)  NOT NULL,
-    [Pregunta16] nvarchar(max)  NOT NULL,
-    [Pregunta17] nvarchar(max)  NOT NULL,
-    [Pregunta18] nvarchar(max)  NOT NULL,
-    [Pregunta19] nvarchar(max)  NOT NULL,
-    [Pregunta20] nvarchar(max)  NOT NULL,
-    [Pregunta21] nvarchar(max)  NOT NULL,
-    [Pregunta22] nvarchar(max)  NOT NULL,
-    [Pregunta23] nvarchar(max)  NOT NULL,
-    [Pregunta24] nvarchar(max)  NOT NULL,
-    [Pregunta25] nvarchar(max)  NOT NULL,
-    [Pregunta26] nvarchar(max)  NOT NULL,
-    [Pregunta27] nvarchar(max)  NOT NULL,
-    [Pregunta28] nvarchar(max)  NOT NULL,
-    [Pregunta29] nvarchar(max)  NOT NULL,
-    [Pregunta30] nvarchar(max)  NOT NULL,
-    [Pregunta31] nvarchar(max)  NOT NULL,
-    [Pregunta32] nvarchar(max)  NOT NULL,
-    [Pregunta33] nvarchar(max)  NOT NULL,
-    [Pregunta34] nvarchar(max)  NOT NULL,
-    [Pregunta35] nvarchar(max)  NOT NULL,
-    [Pregunta36] nvarchar(max)  NOT NULL,
-    [Pregunta37] nvarchar(max)  NOT NULL,
-    [Pregunta38] nvarchar(max)  NOT NULL,
-    [Pregunta39] nvarchar(max)  NOT NULL,
-    [Pregunta40] nvarchar(max)  NOT NULL
+    [Pregunta1] nvarchar(max)  NULL,
+    [Pregunta2] nvarchar(max)  NULL,
+    [Pregunta3] nvarchar(max)  NULL,
+    [Pregunta4] nvarchar(max)  NULL,
+    [Pregunta5] nvarchar(max)  NULL,
+    [Pregunta6] nvarchar(max)  NULL,
+    [Pregunta7] nvarchar(max)  NULL,
+    [Pregunta8] nvarchar(max)  NULL,
+    [Pregunta9] nvarchar(max)  NULL,
+    [Pregunta10] nvarchar(max)  NULL,
+    [Pregunta11] nvarchar(max)  NULL,
+    [Pregunta12] nvarchar(max)  NULL,
+    [Pregunta13] nvarchar(max)  NULL,
+    [Pregunta14] nvarchar(max)  NULL,
+    [Pregunta15] nvarchar(max)  NULL,
+    [Pregunta16] nvarchar(max)  NULL,
+    [Pregunta17] nvarchar(max)  NULL,
+    [Pregunta18] nvarchar(max)  NULL,
+    [Pregunta19] nvarchar(max)  NULL,
+    [Pregunta20] nvarchar(max)  NULL,
+    [Pregunta21] nvarchar(max)  NULL,
+    [Pregunta22] nvarchar(max)  NULL,
+    [Pregunta23] nvarchar(max)  NULL,
+    [Pregunta24] nvarchar(max)  NULL,
+    [Pregunta25] nvarchar(max)  NULL,
+    [Pregunta26] nvarchar(max)  NULL,
+    [Pregunta27] nvarchar(max)  NULL,
+    [Pregunta28] nvarchar(max)  NULL,
+    [Pregunta29] nvarchar(max)  NULL,
+    [Pregunta30] nvarchar(max)  NULL,
+    [Pregunta31] nvarchar(max)  NULL,
+    [Pregunta32] nvarchar(max)  NULL,
+    [Pregunta33] nvarchar(max)  NULL,
+    [Pregunta34] nvarchar(max)  NULL,
+    [Pregunta35] nvarchar(max)  NULL,
+    [Pregunta36] nvarchar(max)  NULL,
+    [Pregunta37] nvarchar(max)  NULL,
+    [Pregunta38] nvarchar(max)  NULL,
+    [Pregunta39] nvarchar(max)  NULL,
+    [Pregunta40] nvarchar(max)  NULL,
+    [ExamenIdExamen] int  NOT NULL
 );
 GO
 
@@ -149,19 +149,19 @@ ON [dbo].[Examenes]
     ([AlumnoIdAlumno]);
 GO
 
--- Creating foreign key on [DetalleExaman_IdDetalleExamen] in table 'Examenes'
-ALTER TABLE [dbo].[Examenes]
+-- Creating foreign key on [ExamenIdExamen] in table 'DetalleExamenes'
+ALTER TABLE [dbo].[DetalleExamenes]
 ADD CONSTRAINT [FK_ExamenDetalleExamen]
-    FOREIGN KEY ([DetalleExaman_IdDetalleExamen])
-    REFERENCES [dbo].[DetalleExamenes]
-        ([IdDetalleExamen])
+    FOREIGN KEY ([ExamenIdExamen])
+    REFERENCES [dbo].[Examenes]
+        ([IdExamen])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ExamenDetalleExamen'
 CREATE INDEX [IX_FK_ExamenDetalleExamen]
-ON [dbo].[Examenes]
-    ([DetalleExaman_IdDetalleExamen]);
+ON [dbo].[DetalleExamenes]
+    ([ExamenIdExamen]);
 GO
 
 -- --------------------------------------------------

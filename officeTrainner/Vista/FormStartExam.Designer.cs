@@ -155,6 +155,7 @@
             this.BtnExcel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnExcel.Textcolor = System.Drawing.Color.White;
             this.BtnExcel.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnExcel.Click += new System.EventHandler(this.BtnExcel_Click);
             // 
             // BtnPowerPoint
             // 
@@ -190,6 +191,7 @@
             this.BtnPowerPoint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnPowerPoint.Textcolor = System.Drawing.Color.White;
             this.BtnPowerPoint.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnPowerPoint.Click += new System.EventHandler(this.BtnPowerPoint_Click);
             // 
             // BtnWord
             // 
@@ -225,6 +227,7 @@
             this.BtnWord.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnWord.Textcolor = System.Drawing.Color.White;
             this.BtnWord.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnWord.Click += new System.EventHandler(this.BtnWord_Click);
             // 
             // BtnBack
             // 

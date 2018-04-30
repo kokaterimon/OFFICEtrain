@@ -33,56 +33,56 @@
     <Property Name="IdExamen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="NombreExamen" Type="nvarchar(max)" Nullable="false" />
     <Property Name="fecha" Type="datetime" Nullable="false" />
-    <Property Name="Avance" Type="int" Nullable="true" />
+    <Property Name="Avance" Type="int" Nullable="false" />
     <Property Name="AlumnoIdAlumno" Type="int" Nullable="false" />
-    <Property Name="NumeroDePreguntas" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DetalleExaman_IdDetalleExamen" Type="int" Nullable="false" />
+    <Property Name="NumeroDePreguntas" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="DetalleExamenes">
     <Key>
       <PropertyRef Name="IdDetalleExamen" />
     </Key>
     <Property Name="IdDetalleExamen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Pregunta1" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta2" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta3" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta4" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta5" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta6" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta7" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta8" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta9" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta10" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta11" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta12" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta13" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta14" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta15" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta16" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta17" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta18" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta19" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta20" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta21" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta22" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta23" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta24" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta25" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta26" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta27" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta28" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta29" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta30" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta31" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta32" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta33" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta34" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta35" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta36" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta37" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta38" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta39" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pregunta40" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Pregunta1" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta2" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta3" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta4" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta5" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta6" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta7" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta8" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta9" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta10" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta11" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta12" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta13" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta14" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta15" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta16" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta17" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta18" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta19" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta20" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta21" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta22" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta23" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta24" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta25" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta26" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta27" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta28" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta29" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta30" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta31" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta32" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta33" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta34" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta35" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta36" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta37" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta38" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta39" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Pregunta40" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ExamenIdExamen" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="AlumnoExamen">
     <End Role="Alumno" Type="Model.Store.Alumnos" Multiplicity="1" />
@@ -97,14 +97,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ExamenDetalleExamen">
-    <End Role="Examen" Type="Model.Store.Examenes" Multiplicity="*" />
-    <End Role="DetalleExamen" Type="Model.Store.DetalleExamenes" Multiplicity="1" />
+    <End Role="Examen" Type="Model.Store.Examenes" Multiplicity="1" />
+    <End Role="DetalleExamen" Type="Model.Store.DetalleExamenes" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="DetalleExamen">
-        <PropertyRef Name="IdDetalleExamen" />
+      <Principal Role="Examen">
+        <PropertyRef Name="IdExamen" />
       </Principal>
-      <Dependent Role="Examen">
-        <PropertyRef Name="DetalleExaman_IdDetalleExamen" />
+      <Dependent Role="DetalleExamen">
+        <PropertyRef Name="ExamenIdExamen" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -141,56 +141,56 @@
           <Property Name="IdExamen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NombreExamen" Type="String" Nullable="false" />
           <Property Name="fecha" Type="DateTime" Nullable="false" />
-          <Property Name="Avance" Type="Int32" Nullable="true" />
+          <Property Name="Avance" Type="Int32" Nullable="false" />
           <Property Name="AlumnoIdAlumno" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="DetalleExaman" Relationship="Model.ExamenDetalleExamen" FromRole="Examen" ToRole="DetalleExamen" />
-          <Property Name="NumeroDePreguntas" Type="String" Nullable="false" />
+          <Property Name="NumeroDePreguntas" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="DetalleExamen">
           <Key>
             <PropertyRef Name="IdDetalleExamen" />
           </Key>
           <Property Name="IdDetalleExamen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Pregunta1" Type="String" Nullable="false" />
-          <Property Name="Pregunta2" Type="String" Nullable="false" />
-          <Property Name="Pregunta3" Type="String" Nullable="false" />
-          <Property Name="Pregunta4" Type="String" Nullable="false" />
-          <Property Name="Pregunta5" Type="String" Nullable="false" />
-          <Property Name="Pregunta6" Type="String" Nullable="false" />
-          <Property Name="Pregunta7" Type="String" Nullable="false" />
-          <Property Name="Pregunta8" Type="String" Nullable="false" />
-          <Property Name="Pregunta9" Type="String" Nullable="false" />
-          <Property Name="Pregunta10" Type="String" Nullable="false" />
-          <Property Name="Pregunta11" Type="String" Nullable="false" />
-          <Property Name="Pregunta12" Type="String" Nullable="false" />
-          <Property Name="Pregunta13" Type="String" Nullable="false" />
-          <Property Name="Pregunta14" Type="String" Nullable="false" />
-          <Property Name="Pregunta15" Type="String" Nullable="false" />
-          <Property Name="Pregunta16" Type="String" Nullable="false" />
-          <Property Name="Pregunta17" Type="String" Nullable="false" />
-          <Property Name="Pregunta18" Type="String" Nullable="false" />
-          <Property Name="Pregunta19" Type="String" Nullable="false" />
-          <Property Name="Pregunta20" Type="String" Nullable="false" />
-          <Property Name="Pregunta21" Type="String" Nullable="false" />
-          <Property Name="Pregunta22" Type="String" Nullable="false" />
-          <Property Name="Pregunta23" Type="String" Nullable="false" />
-          <Property Name="Pregunta24" Type="String" Nullable="false" />
-          <Property Name="Pregunta25" Type="String" Nullable="false" />
-          <Property Name="Pregunta26" Type="String" Nullable="false" />
-          <Property Name="Pregunta27" Type="String" Nullable="false" />
-          <Property Name="Pregunta28" Type="String" Nullable="false" />
-          <Property Name="Pregunta29" Type="String" Nullable="false" />
-          <Property Name="Pregunta30" Type="String" Nullable="false" />
-          <Property Name="Pregunta31" Type="String" Nullable="false" />
-          <Property Name="Pregunta32" Type="String" Nullable="false" />
-          <Property Name="Pregunta33" Type="String" Nullable="false" />
-          <Property Name="Pregunta34" Type="String" Nullable="false" />
-          <Property Name="Pregunta35" Type="String" Nullable="false" />
-          <Property Name="Pregunta36" Type="String" Nullable="false" />
-          <Property Name="Pregunta37" Type="String" Nullable="false" />
-          <Property Name="Pregunta38" Type="String" Nullable="false" />
-          <Property Name="Pregunta39" Type="String" Nullable="false" />
-          <Property Name="Pregunta40" Type="String" Nullable="false" />
+          <Property Name="Pregunta1" Type="String" Nullable="true" />
+          <Property Name="Pregunta2" Type="String" Nullable="true" />
+          <Property Name="Pregunta3" Type="String" Nullable="true" />
+          <Property Name="Pregunta4" Type="String" Nullable="true" />
+          <Property Name="Pregunta5" Type="String" Nullable="true" />
+          <Property Name="Pregunta6" Type="String" Nullable="true" />
+          <Property Name="Pregunta7" Type="String" Nullable="true" />
+          <Property Name="Pregunta8" Type="String" Nullable="true" />
+          <Property Name="Pregunta9" Type="String" Nullable="true" />
+          <Property Name="Pregunta10" Type="String" Nullable="true" />
+          <Property Name="Pregunta11" Type="String" Nullable="true" />
+          <Property Name="Pregunta12" Type="String" Nullable="true" />
+          <Property Name="Pregunta13" Type="String" Nullable="true" />
+          <Property Name="Pregunta14" Type="String" Nullable="true" />
+          <Property Name="Pregunta15" Type="String" Nullable="true" />
+          <Property Name="Pregunta16" Type="String" Nullable="true" />
+          <Property Name="Pregunta17" Type="String" Nullable="true" />
+          <Property Name="Pregunta18" Type="String" Nullable="true" />
+          <Property Name="Pregunta19" Type="String" Nullable="true" />
+          <Property Name="Pregunta20" Type="String" Nullable="true" />
+          <Property Name="Pregunta21" Type="String" Nullable="true" />
+          <Property Name="Pregunta22" Type="String" Nullable="true" />
+          <Property Name="Pregunta23" Type="String" Nullable="true" />
+          <Property Name="Pregunta24" Type="String" Nullable="true" />
+          <Property Name="Pregunta25" Type="String" Nullable="true" />
+          <Property Name="Pregunta26" Type="String" Nullable="true" />
+          <Property Name="Pregunta27" Type="String" Nullable="true" />
+          <Property Name="Pregunta28" Type="String" Nullable="true" />
+          <Property Name="Pregunta29" Type="String" Nullable="true" />
+          <Property Name="Pregunta30" Type="String" Nullable="true" />
+          <Property Name="Pregunta31" Type="String" Nullable="true" />
+          <Property Name="Pregunta32" Type="String" Nullable="true" />
+          <Property Name="Pregunta33" Type="String" Nullable="true" />
+          <Property Name="Pregunta34" Type="String" Nullable="true" />
+          <Property Name="Pregunta35" Type="String" Nullable="true" />
+          <Property Name="Pregunta36" Type="String" Nullable="true" />
+          <Property Name="Pregunta37" Type="String" Nullable="true" />
+          <Property Name="Pregunta38" Type="String" Nullable="true" />
+          <Property Name="Pregunta39" Type="String" Nullable="true" />
+          <Property Name="Pregunta40" Type="String" Nullable="true" />
+          <Property Name="ExamenIdExamen" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="AlumnoExamen">
           <End Type="Model.Alumno" Role="Alumno" Multiplicity="1" />
@@ -206,7 +206,15 @@
         </Association>
         <Association Name="ExamenDetalleExamen">
           <End Type="Model.Examen" Role="Examen" Multiplicity="1" />
-          <End Type="Model.DetalleExamen" Role="DetalleExamen" Multiplicity="1" />
+          <End Type="Model.DetalleExamen" Role="DetalleExamen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Examen">
+              <PropertyRef Name="IdExamen" />
+            </Principal>
+            <Dependent Role="DetalleExamen">
+              <PropertyRef Name="ExamenIdExamen" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -279,17 +287,10 @@
           <ScalarProperty Name="Pregunta38" ColumnName="Pregunta38" />
           <ScalarProperty Name="Pregunta39" ColumnName="Pregunta39" />
           <ScalarProperty Name="Pregunta40" ColumnName="Pregunta40" />
+          <ScalarProperty Name="ExamenIdExamen" ColumnName="ExamenIdExamen" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="ExamenDetalleExamen" TypeName="Model.ExamenDetalleExamen" StoreEntitySet="Examenes">
-      <EndProperty Name="DetalleExamen">
-        <ScalarProperty Name="IdDetalleExamen" ColumnName="DetalleExaman_IdDetalleExamen" />
-      </EndProperty>
-      <EndProperty Name="Examen">
-        <ScalarProperty Name="IdExamen" ColumnName="IdExamen" />
-      </EndProperty>
-    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
