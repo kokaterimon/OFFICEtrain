@@ -21,7 +21,7 @@ namespace Vista
             //Creamos un objeto que trabaje con la dll
             //object ObjMiss = System.Reflection.Missing.Value;
             Excel.Application ObjExcel = new Excel.Application();
-            string ruta = Application.StartupPath + @"\Documentos\Excel\pregunta1\Pregunta1Ejercicio.xlsx";
+            string ruta = Application.StartupPath + @"\Documentos\Excel\pregunta 1\Pregunta 1 Ejercicio.xlsx";
             ObjExcel.Visible = true;
 
             //La razón entre la resolución del office y la pantalla es: 811/1080=office/screen
