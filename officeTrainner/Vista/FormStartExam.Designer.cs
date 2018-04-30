@@ -57,10 +57,10 @@
             this.label11 = new System.Windows.Forms.Label();
             this.ChbEntrenamiento = new Bunifu.Framework.UI.BunifuCheckbox();
             this.PnlOptions = new System.Windows.Forms.Panel();
+            this.bunifuFlatButton2 = new Bunifu.Framework.UI.BunifuFlatButton();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.bunifuFlatButton1 = new Bunifu.Framework.UI.BunifuFlatButton();
-            this.bunifuFlatButton2 = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.BtnComenzarExamen = new Bunifu.Framework.UI.BunifuFlatButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.PnlSelectExam.SuspendLayout();
             this.PnlSelectedExam.SuspendLayout();
@@ -519,7 +519,7 @@
             this.PnlOptions.Controls.Add(this.bunifuFlatButton2);
             this.PnlOptions.Controls.Add(this.label13);
             this.PnlOptions.Controls.Add(this.label12);
-            this.PnlOptions.Controls.Add(this.bunifuFlatButton1);
+            this.PnlOptions.Controls.Add(this.BtnComenzarExamen);
             this.PnlOptions.Controls.Add(this.label8);
             this.PnlOptions.Controls.Add(this.ChbOrdenPregAle);
             this.PnlOptions.Controls.Add(this.ChbGuardarResultados);
@@ -532,66 +532,6 @@
             this.PnlOptions.Name = "PnlOptions";
             this.PnlOptions.Size = new System.Drawing.Size(535, 224);
             this.PnlOptions.TabIndex = 16;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.Silver;
-            this.label13.Location = new System.Drawing.Point(46, 158);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(135, 20);
-            this.label13.TabIndex = 25;
-            this.label13.Text = "haga click debajo:";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.Silver;
-            this.label12.Location = new System.Drawing.Point(46, 138);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(381, 20);
-            this.label12.TabIndex = 17;
-            this.label12.Text = "Para crear un examen con preguntas personalizadas";
-            // 
-            // bunifuFlatButton1
-            // 
-            this.bunifuFlatButton1.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.bunifuFlatButton1.BackColor = System.Drawing.Color.Yellow;
-            this.bunifuFlatButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.bunifuFlatButton1.BorderRadius = 0;
-            this.bunifuFlatButton1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.bunifuFlatButton1.ButtonText = "Comenzar Examen >>";
-            this.bunifuFlatButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bunifuFlatButton1.DisabledColor = System.Drawing.Color.Gray;
-            this.bunifuFlatButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuFlatButton1.Iconcolor = System.Drawing.Color.Transparent;
-            this.bunifuFlatButton1.Iconimage = ((System.Drawing.Image)(resources.GetObject("bunifuFlatButton1.Iconimage")));
-            this.bunifuFlatButton1.Iconimage_right = null;
-            this.bunifuFlatButton1.Iconimage_right_Selected = null;
-            this.bunifuFlatButton1.Iconimage_Selected = null;
-            this.bunifuFlatButton1.IconMarginLeft = 0;
-            this.bunifuFlatButton1.IconMarginRight = 0;
-            this.bunifuFlatButton1.IconRightVisible = false;
-            this.bunifuFlatButton1.IconRightZoom = 0D;
-            this.bunifuFlatButton1.IconVisible = false;
-            this.bunifuFlatButton1.IconZoom = 90D;
-            this.bunifuFlatButton1.IsTab = false;
-            this.bunifuFlatButton1.Location = new System.Drawing.Point(169, 91);
-            this.bunifuFlatButton1.Margin = new System.Windows.Forms.Padding(4);
-            this.bunifuFlatButton1.Name = "bunifuFlatButton1";
-            this.bunifuFlatButton1.Normalcolor = System.Drawing.Color.Yellow;
-            this.bunifuFlatButton1.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.bunifuFlatButton1.OnHoverTextColor = System.Drawing.Color.White;
-            this.bunifuFlatButton1.selected = false;
-            this.bunifuFlatButton1.Size = new System.Drawing.Size(186, 22);
-            this.bunifuFlatButton1.TabIndex = 17;
-            this.bunifuFlatButton1.Text = "Comenzar Examen >>";
-            this.bunifuFlatButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bunifuFlatButton1.Textcolor = System.Drawing.Color.Black;
-            this.bunifuFlatButton1.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuFlatButton1.Click += new System.EventHandler(this.bunifuFlatButton1_Click);
             // 
             // bunifuFlatButton2
             // 
@@ -630,6 +570,66 @@
             this.bunifuFlatButton2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bunifuFlatButton2.Textcolor = System.Drawing.Color.Black;
             this.bunifuFlatButton2.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.Silver;
+            this.label13.Location = new System.Drawing.Point(46, 158);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(135, 20);
+            this.label13.TabIndex = 25;
+            this.label13.Text = "haga click debajo:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.Silver;
+            this.label12.Location = new System.Drawing.Point(46, 138);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(381, 20);
+            this.label12.TabIndex = 17;
+            this.label12.Text = "Para crear un examen con preguntas personalizadas";
+            // 
+            // BtnComenzarExamen
+            // 
+            this.BtnComenzarExamen.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.BtnComenzarExamen.BackColor = System.Drawing.Color.Yellow;
+            this.BtnComenzarExamen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.BtnComenzarExamen.BorderRadius = 0;
+            this.BtnComenzarExamen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BtnComenzarExamen.ButtonText = "Comenzar Examen >>";
+            this.BtnComenzarExamen.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnComenzarExamen.DisabledColor = System.Drawing.Color.Gray;
+            this.BtnComenzarExamen.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnComenzarExamen.Iconcolor = System.Drawing.Color.Transparent;
+            this.BtnComenzarExamen.Iconimage = ((System.Drawing.Image)(resources.GetObject("BtnComenzarExamen.Iconimage")));
+            this.BtnComenzarExamen.Iconimage_right = null;
+            this.BtnComenzarExamen.Iconimage_right_Selected = null;
+            this.BtnComenzarExamen.Iconimage_Selected = null;
+            this.BtnComenzarExamen.IconMarginLeft = 0;
+            this.BtnComenzarExamen.IconMarginRight = 0;
+            this.BtnComenzarExamen.IconRightVisible = false;
+            this.BtnComenzarExamen.IconRightZoom = 0D;
+            this.BtnComenzarExamen.IconVisible = false;
+            this.BtnComenzarExamen.IconZoom = 90D;
+            this.BtnComenzarExamen.IsTab = false;
+            this.BtnComenzarExamen.Location = new System.Drawing.Point(169, 91);
+            this.BtnComenzarExamen.Margin = new System.Windows.Forms.Padding(4);
+            this.BtnComenzarExamen.Name = "BtnComenzarExamen";
+            this.BtnComenzarExamen.Normalcolor = System.Drawing.Color.Yellow;
+            this.BtnComenzarExamen.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.BtnComenzarExamen.OnHoverTextColor = System.Drawing.Color.White;
+            this.BtnComenzarExamen.selected = false;
+            this.BtnComenzarExamen.Size = new System.Drawing.Size(186, 22);
+            this.BtnComenzarExamen.TabIndex = 17;
+            this.BtnComenzarExamen.Text = "Comenzar Examen >>";
+            this.BtnComenzarExamen.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnComenzarExamen.Textcolor = System.Drawing.Color.Black;
+            this.BtnComenzarExamen.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnComenzarExamen.Click += new System.EventHandler(this.BtnComenzarExamen_Click);
             // 
             // FormStartExam
             // 
@@ -692,7 +692,7 @@
         private System.Windows.Forms.Label label11;
         private Bunifu.Framework.UI.BunifuCheckbox ChbEntrenamiento;
         private System.Windows.Forms.Panel PnlOptions;
-        private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButton1;
+        private Bunifu.Framework.UI.BunifuFlatButton BtnComenzarExamen;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButton2;
