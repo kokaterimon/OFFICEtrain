@@ -41,15 +41,15 @@ namespace Vista
         #region Methods
         private void MostrarPreguntaYEjercicio()
         {
-            int NumeroDePregunta = FormStartExam.ArrayOrdenDePreguntas[contadorDeAvance];
-            if (!AbrirEjercicioExcel(NumeroDePregunta))
+            int numeroDePregunta = FormStartExam.arrayOrdenDePreguntas[contadorDeAvance];
+            if (!AbrirEjercicioExcel(numeroDePregunta))
             {
                 contadorDeAvance++;
                 MostrarPreguntaYEjercicio();                
             }
             else
             {
-                MostrarPregunta(NumeroDePregunta);
+                MostrarPregunta(numeroDePregunta);
                 contadorDeAvance++;
             }
            

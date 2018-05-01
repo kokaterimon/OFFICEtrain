@@ -9,6 +9,7 @@
     <EntitySet Name="Alumnos" EntityType="Model.Store.Alumnos" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Examenes" EntityType="Model.Store.Examenes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="DetalleExamenes" EntityType="Model.Store.DetalleExamenes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ArrayOrdenPreguntas" EntityType="Model.Store.ArrayOrdenPreguntas" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="AlumnoExamen" Association="Model.Store.AlumnoExamen">
       <End Role="Alumno" EntitySet="Alumnos" />
       <End Role="Examen" EntitySet="Examenes" />
@@ -17,25 +18,33 @@
       <End Role="Examen" EntitySet="Examenes" />
       <End Role="DetalleExamen" EntitySet="DetalleExamenes" />
     </AssociationSet>
+    <AssociationSet Name="ExamenArrayOrdenPreguntas" Association="Model.Store.ExamenArrayOrdenPreguntas">
+      <End Role="Examen" EntitySet="Examenes" />
+      <End Role="ArrayOrdenPreguntas" EntitySet="ArrayOrdenPreguntas" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Alumnos">
     <Key>
       <PropertyRef Name="IdAlumno" />
     </Key>
     <Property Name="IdAlumno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nombres" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Apellidos" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="nombres" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="apellidos" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Examenes">
     <Key>
       <PropertyRef Name="IdExamen" />
     </Key>
     <Property Name="IdExamen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="NombreExamen" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="nombreExamen" Type="nvarchar(max)" Nullable="false" />
     <Property Name="fecha" Type="datetime" Nullable="false" />
-    <Property Name="Avance" Type="int" Nullable="false" />
-    <Property Name="AlumnoIdAlumno" Type="int" Nullable="false" />
-    <Property Name="NumeroDePreguntas" Type="int" Nullable="false" />
+    <Property Name="avance" Type="int" Nullable="false" />
+    <Property Name="alumnoIdAlumno" Type="int" Nullable="false" />
+    <Property Name="numeroDePreguntas" Type="int" Nullable="false" />
+    <Property Name="banderaAleatorio" Type="bit" Nullable="false" />
+    <Property Name="banderaCronometro" Type="bit" Nullable="false" />
+    <Property Name="banderaGuardar" Type="bit" Nullable="false" />
+    <Property Name="banderaReanudar" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="DetalleExamenes">
     <Key>
@@ -84,6 +93,63 @@
     <Property Name="Pregunta40" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ExamenIdExamen" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="ArrayOrdenPreguntas">
+    <Key>
+      <PropertyRef Name="IdArrayOrdenPreguntas" />
+    </Key>
+    <Property Name="IdArrayOrdenPreguntas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="p01" Type="int" Nullable="false" />
+    <Property Name="p02" Type="int" Nullable="false" />
+    <Property Name="p03" Type="int" Nullable="false" />
+    <Property Name="p04" Type="int" Nullable="false" />
+    <Property Name="p05" Type="int" Nullable="false" />
+    <Property Name="p06" Type="int" Nullable="false" />
+    <Property Name="p07" Type="int" Nullable="false" />
+    <Property Name="p08" Type="int" Nullable="false" />
+    <Property Name="p09" Type="int" Nullable="false" />
+    <Property Name="p10" Type="int" Nullable="false" />
+    <Property Name="p11" Type="int" Nullable="false" />
+    <Property Name="p12" Type="int" Nullable="false" />
+    <Property Name="p13" Type="int" Nullable="false" />
+    <Property Name="p14" Type="int" Nullable="false" />
+    <Property Name="p15" Type="int" Nullable="false" />
+    <Property Name="p16" Type="int" Nullable="false" />
+    <Property Name="p17" Type="int" Nullable="false" />
+    <Property Name="p18" Type="int" Nullable="false" />
+    <Property Name="p19" Type="int" Nullable="false" />
+    <Property Name="p20" Type="int" Nullable="false" />
+    <Property Name="p21" Type="int" Nullable="false" />
+    <Property Name="p22" Type="int" Nullable="false" />
+    <Property Name="p23" Type="int" Nullable="false" />
+    <Property Name="p24" Type="int" Nullable="false" />
+    <Property Name="p25" Type="int" Nullable="false" />
+    <Property Name="p26" Type="int" Nullable="false" />
+    <Property Name="p27" Type="int" Nullable="false" />
+    <Property Name="p28" Type="int" Nullable="false" />
+    <Property Name="p29" Type="int" Nullable="false" />
+    <Property Name="p30" Type="int" Nullable="false" />
+    <Property Name="p31" Type="int" Nullable="false" />
+    <Property Name="p32" Type="int" Nullable="false" />
+    <Property Name="p33" Type="int" Nullable="false" />
+    <Property Name="p34" Type="int" Nullable="false" />
+    <Property Name="p35" Type="int" Nullable="false" />
+    <Property Name="p36" Type="int" Nullable="false" />
+    <Property Name="p37" Type="int" Nullable="false" />
+    <Property Name="p38" Type="int" Nullable="false" />
+    <Property Name="p39" Type="int" Nullable="false" />
+    <Property Name="p40" Type="int" Nullable="false" />
+    <Property Name="p41" Type="int" Nullable="false" />
+    <Property Name="p42" Type="int" Nullable="false" />
+    <Property Name="p43" Type="int" Nullable="false" />
+    <Property Name="p44" Type="int" Nullable="false" />
+    <Property Name="p45" Type="int" Nullable="false" />
+    <Property Name="p46" Type="int" Nullable="false" />
+    <Property Name="p47" Type="int" Nullable="false" />
+    <Property Name="p48" Type="int" Nullable="false" />
+    <Property Name="p49" Type="int" Nullable="false" />
+    <Property Name="p50" Type="int" Nullable="false" />
+    <Property Name="ExamenIdExamen" Type="int" Nullable="false" />
+  </EntityType>
   <Association Name="AlumnoExamen">
     <End Role="Alumno" Type="Model.Store.Alumnos" Multiplicity="1" />
     <End Role="Examen" Type="Model.Store.Examenes" Multiplicity="*" />
@@ -92,7 +158,7 @@
         <PropertyRef Name="IdAlumno" />
       </Principal>
       <Dependent Role="Examen">
-        <PropertyRef Name="AlumnoIdAlumno" />
+        <PropertyRef Name="alumnoIdAlumno" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -104,6 +170,18 @@
         <PropertyRef Name="IdExamen" />
       </Principal>
       <Dependent Role="DetalleExamen">
+        <PropertyRef Name="ExamenIdExamen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ExamenArrayOrdenPreguntas">
+    <End Role="Examen" Type="Model.Store.Examenes" Multiplicity="1" />
+    <End Role="ArrayOrdenPreguntas" Type="Model.Store.ArrayOrdenPreguntas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Examen">
+        <PropertyRef Name="IdExamen" />
+      </Principal>
+      <Dependent Role="ArrayOrdenPreguntas">
         <PropertyRef Name="ExamenIdExamen" />
       </Dependent>
     </ReferentialConstraint>
@@ -124,14 +202,19 @@
             <End Role="Examen" EntitySet="Examenes" />
             <End Role="DetalleExamen" EntitySet="DetalleExamenes" />
           </AssociationSet>
+          <EntitySet Name="ArrayOrdenPreguntas" EntityType="Model.ArrayOrdenPreguntas" />
+          <AssociationSet Name="ExamenArrayOrdenPreguntas" Association="Model.ExamenArrayOrdenPreguntas">
+            <End Role="Examen" EntitySet="Examenes" />
+            <End Role="ArrayOrdenPreguntas" EntitySet="ArrayOrdenPreguntas" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Alumno">
           <Key>
             <PropertyRef Name="IdAlumno" />
           </Key>
           <Property Name="IdAlumno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombres" Type="String" Nullable="false" />
-          <Property Name="Apellidos" Type="String" Nullable="false" />
+          <Property Name="nombres" Type="String" Nullable="false" />
+          <Property Name="apellidos" Type="String" Nullable="false" />
           <NavigationProperty Name="Examen" Relationship="Model.AlumnoExamen" FromRole="Alumno" ToRole="Examen" />
         </EntityType>
         <EntityType Name="Examen">
@@ -139,11 +222,15 @@
             <PropertyRef Name="IdExamen" />
           </Key>
           <Property Name="IdExamen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NombreExamen" Type="String" Nullable="false" />
+          <Property Name="nombreExamen" Type="String" Nullable="false" />
           <Property Name="fecha" Type="DateTime" Nullable="false" />
-          <Property Name="Avance" Type="Int32" Nullable="false" />
-          <Property Name="AlumnoIdAlumno" Type="Int32" Nullable="false" />
-          <Property Name="NumeroDePreguntas" Type="Int32" Nullable="false" />
+          <Property Name="avance" Type="Int32" Nullable="false" />
+          <Property Name="alumnoIdAlumno" Type="Int32" Nullable="false" />
+          <Property Name="numeroDePreguntas" Type="Int32" Nullable="false" />
+          <Property Name="banderaAleatorio" Type="Boolean" Nullable="false" />
+          <Property Name="banderaCronometro" Type="Boolean" Nullable="false" />
+          <Property Name="banderaGuardar" Type="Boolean" Nullable="false" />
+          <Property Name="banderaReanudar" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="DetalleExamen">
           <Key>
@@ -200,7 +287,7 @@
               <PropertyRef Name="IdAlumno" />
             </Principal>
             <Dependent Role="Examen">
-              <PropertyRef Name="AlumnoIdAlumno" />
+              <PropertyRef Name="alumnoIdAlumno" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -216,6 +303,75 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ArrayOrdenPreguntas">
+          <Key>
+            <PropertyRef Name="IdArrayOrdenPreguntas" />
+          </Key>
+          <Property Name="IdArrayOrdenPreguntas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="p01" Type="Int32" Nullable="false" />
+          <Property Name="p02" Type="Int32" Nullable="false" />
+          <Property Name="p03" Type="Int32" Nullable="false" />
+          <Property Name="p04" Type="Int32" Nullable="false" />
+          <Property Name="p05" Type="Int32" Nullable="false" />
+          <Property Name="p06" Type="Int32" Nullable="false" />
+          <Property Name="p07" Type="Int32" Nullable="false" />
+          <Property Name="p08" Type="Int32" Nullable="false" />
+          <Property Name="p09" Type="Int32" Nullable="false" />
+          <Property Name="p10" Type="Int32" Nullable="false" />
+          <Property Name="p11" Type="Int32" Nullable="false" />
+          <Property Name="p12" Type="Int32" Nullable="false" />
+          <Property Name="p13" Type="Int32" Nullable="false" />
+          <Property Name="p14" Type="Int32" Nullable="false" />
+          <Property Name="p15" Type="Int32" Nullable="false" />
+          <Property Name="p16" Type="Int32" Nullable="false" />
+          <Property Name="p17" Type="Int32" Nullable="false" />
+          <Property Name="p18" Type="Int32" Nullable="false" />
+          <Property Name="p19" Type="Int32" Nullable="false" />
+          <Property Name="p20" Type="Int32" Nullable="false" />
+          <Property Name="p21" Type="Int32" Nullable="false" />
+          <Property Name="p22" Type="Int32" Nullable="false" />
+          <Property Name="p23" Type="Int32" Nullable="false" />
+          <Property Name="p24" Type="Int32" Nullable="false" />
+          <Property Name="p25" Type="Int32" Nullable="false" />
+          <Property Name="p26" Type="Int32" Nullable="false" />
+          <Property Name="p27" Type="Int32" Nullable="false" />
+          <Property Name="p28" Type="Int32" Nullable="false" />
+          <Property Name="p29" Type="Int32" Nullable="false" />
+          <Property Name="p30" Type="Int32" Nullable="false" />
+          <Property Name="p31" Type="Int32" Nullable="false" />
+          <Property Name="p32" Type="Int32" Nullable="false" />
+          <Property Name="p33" Type="Int32" Nullable="false" />
+          <Property Name="p34" Type="Int32" Nullable="false" />
+          <Property Name="p35" Type="Int32" Nullable="false" />
+          <Property Name="p36" Type="Int32" Nullable="false" />
+          <Property Name="p37" Type="Int32" Nullable="false" />
+          <Property Name="p38" Type="Int32" Nullable="false" />
+          <Property Name="p39" Type="Int32" Nullable="false" />
+          <Property Name="p40" Type="Int32" Nullable="false" />
+          <Property Name="p41" Type="Int32" Nullable="false" />
+          <Property Name="p42" Type="Int32" Nullable="false" />
+          <Property Name="p43" Type="Int32" Nullable="false" />
+          <Property Name="p44" Type="Int32" Nullable="false" />
+          <Property Name="p45" Type="Int32" Nullable="false" />
+          <Property Name="p46" Type="Int32" Nullable="false" />
+          <Property Name="p47" Type="Int32" Nullable="false" />
+          <Property Name="p48" Type="Int32" Nullable="false" />
+          <Property Name="p49" Type="Int32" Nullable="false" />
+          <Property Name="p50" Type="Int32" Nullable="false" />
+          <Property Name="ExamenIdExamen" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="ExamenArrayOrdenPreguntas">
+          <End Type="Model.Examen" Role="Examen" Multiplicity="1" />
+          <End Type="Model.ArrayOrdenPreguntas" Role="ArrayOrdenPreguntas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Examen">
+              <PropertyRef Name="IdExamen" />
+            </Principal>
+            <Dependent Role="ArrayOrdenPreguntas">
+              <PropertyRef Name="ExamenIdExamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -226,8 +382,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Alumno)">
         <MappingFragment StoreEntitySet="Alumnos">
           <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
-          <ScalarProperty Name="Nombres" ColumnName="Nombres" />
-          <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+          <ScalarProperty Name="nombres" ColumnName="nombres" />
+          <ScalarProperty Name="apellidos" ColumnName="apellidos" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -235,11 +391,15 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Examen)">
         <MappingFragment StoreEntitySet="Examenes">
           <ScalarProperty Name="IdExamen" ColumnName="IdExamen" />
-          <ScalarProperty Name="NombreExamen" ColumnName="NombreExamen" />
+          <ScalarProperty Name="nombreExamen" ColumnName="nombreExamen" />
           <ScalarProperty Name="fecha" ColumnName="fecha" />
-          <ScalarProperty Name="Avance" ColumnName="Avance" />
-          <ScalarProperty Name="AlumnoIdAlumno" ColumnName="AlumnoIdAlumno" />
-          <ScalarProperty Name="NumeroDePreguntas" ColumnName="NumeroDePreguntas" />
+          <ScalarProperty Name="avance" ColumnName="avance" />
+          <ScalarProperty Name="alumnoIdAlumno" ColumnName="alumnoIdAlumno" />
+          <ScalarProperty Name="numeroDePreguntas" ColumnName="numeroDePreguntas" />
+          <ScalarProperty Name="banderaAleatorio" ColumnName="banderaAleatorio" />
+          <ScalarProperty Name="banderaCronometro" ColumnName="banderaCronometro" />
+          <ScalarProperty Name="banderaGuardar" ColumnName="banderaGuardar" />
+          <ScalarProperty Name="banderaReanudar" ColumnName="banderaReanudar" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -287,6 +447,64 @@
           <ScalarProperty Name="Pregunta38" ColumnName="Pregunta38" />
           <ScalarProperty Name="Pregunta39" ColumnName="Pregunta39" />
           <ScalarProperty Name="Pregunta40" ColumnName="Pregunta40" />
+          <ScalarProperty Name="ExamenIdExamen" ColumnName="ExamenIdExamen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArrayOrdenPreguntas">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ArrayOrdenPreguntas)">
+        <MappingFragment StoreEntitySet="ArrayOrdenPreguntas">
+          <ScalarProperty Name="IdArrayOrdenPreguntas" ColumnName="IdArrayOrdenPreguntas" />
+          <ScalarProperty Name="p01" ColumnName="p01" />
+          <ScalarProperty Name="p02" ColumnName="p02" />
+          <ScalarProperty Name="p03" ColumnName="p03" />
+          <ScalarProperty Name="p04" ColumnName="p04" />
+          <ScalarProperty Name="p05" ColumnName="p05" />
+          <ScalarProperty Name="p06" ColumnName="p06" />
+          <ScalarProperty Name="p07" ColumnName="p07" />
+          <ScalarProperty Name="p08" ColumnName="p08" />
+          <ScalarProperty Name="p09" ColumnName="p09" />
+          <ScalarProperty Name="p10" ColumnName="p10" />
+          <ScalarProperty Name="p11" ColumnName="p11" />
+          <ScalarProperty Name="p12" ColumnName="p12" />
+          <ScalarProperty Name="p13" ColumnName="p13" />
+          <ScalarProperty Name="p14" ColumnName="p14" />
+          <ScalarProperty Name="p15" ColumnName="p15" />
+          <ScalarProperty Name="p16" ColumnName="p16" />
+          <ScalarProperty Name="p17" ColumnName="p17" />
+          <ScalarProperty Name="p18" ColumnName="p18" />
+          <ScalarProperty Name="p19" ColumnName="p19" />
+          <ScalarProperty Name="p20" ColumnName="p20" />
+          <ScalarProperty Name="p21" ColumnName="p21" />
+          <ScalarProperty Name="p22" ColumnName="p22" />
+          <ScalarProperty Name="p23" ColumnName="p23" />
+          <ScalarProperty Name="p24" ColumnName="p24" />
+          <ScalarProperty Name="p25" ColumnName="p25" />
+          <ScalarProperty Name="p26" ColumnName="p26" />
+          <ScalarProperty Name="p27" ColumnName="p27" />
+          <ScalarProperty Name="p28" ColumnName="p28" />
+          <ScalarProperty Name="p29" ColumnName="p29" />
+          <ScalarProperty Name="p30" ColumnName="p30" />
+          <ScalarProperty Name="p31" ColumnName="p31" />
+          <ScalarProperty Name="p32" ColumnName="p32" />
+          <ScalarProperty Name="p33" ColumnName="p33" />
+          <ScalarProperty Name="p34" ColumnName="p34" />
+          <ScalarProperty Name="p35" ColumnName="p35" />
+          <ScalarProperty Name="p36" ColumnName="p36" />
+          <ScalarProperty Name="p37" ColumnName="p37" />
+          <ScalarProperty Name="p38" ColumnName="p38" />
+          <ScalarProperty Name="p39" ColumnName="p39" />
+          <ScalarProperty Name="p40" ColumnName="p40" />
+          <ScalarProperty Name="p41" ColumnName="p41" />
+          <ScalarProperty Name="p42" ColumnName="p42" />
+          <ScalarProperty Name="p43" ColumnName="p43" />
+          <ScalarProperty Name="p44" ColumnName="p44" />
+          <ScalarProperty Name="p45" ColumnName="p45" />
+          <ScalarProperty Name="p46" ColumnName="p46" />
+          <ScalarProperty Name="p47" ColumnName="p47" />
+          <ScalarProperty Name="p48" ColumnName="p48" />
+          <ScalarProperty Name="p49" ColumnName="p49" />
+          <ScalarProperty Name="p50" ColumnName="p50" />
           <ScalarProperty Name="ExamenIdExamen" ColumnName="ExamenIdExamen" />
         </MappingFragment>
       </EntityTypeMapping>

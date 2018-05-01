@@ -15,10 +15,14 @@ namespace Datos
     public partial class Examen
     {
         public int IdExamen { get; set; }
-        public string NombreExamen { get; set; }
+        public string nombreExamen { get; set; }
         public System.DateTime fecha { get; set; }
-        public int Avance { get; set; }
-        public int AlumnoIdAlumno { get; set; }
-        public int NumeroDePreguntas { get; set; }
+        public int avance { get; set; }
+        public int alumnoIdAlumno { get; set; }
+        public int numeroDePreguntas { get; set; }
+        public bool banderaAleatorio { get; set; }
+        public bool banderaCronometro { get; set; }
+        public bool banderaGuardar { get; set; }
+        public bool banderaReanudar { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/30/2018 17:04:34
+-- Date Created: 05/01/2018 18:01:05
 -- Generated from EDMX file: C:\OFFICEtrainer\officeTrainner\Datos\Model.edmx
 -- --------------------------------------------------
 
@@ -21,7 +21,10 @@ IF OBJECT_ID(N'[dbo].[FK_AlumnoExamen]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Examenes] DROP CONSTRAINT [FK_AlumnoExamen];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ExamenDetalleExamen]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Examenes] DROP CONSTRAINT [FK_ExamenDetalleExamen];
+    ALTER TABLE [dbo].[DetalleExamenes] DROP CONSTRAINT [FK_ExamenDetalleExamen];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ExamenArrayOrdenPreguntas]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ArrayOrdenPreguntas] DROP CONSTRAINT [FK_ExamenArrayOrdenPreguntas];
 GO
 
 -- --------------------------------------------------
@@ -37,6 +40,9 @@ GO
 IF OBJECT_ID(N'[dbo].[DetalleExamenes]', 'U') IS NOT NULL
     DROP TABLE [dbo].[DetalleExamenes];
 GO
+IF OBJECT_ID(N'[dbo].[ArrayOrdenPreguntas]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ArrayOrdenPreguntas];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -45,19 +51,23 @@ GO
 -- Creating table 'Alumnos'
 CREATE TABLE [dbo].[Alumnos] (
     [IdAlumno] int IDENTITY(1,1) NOT NULL,
-    [Nombres] nvarchar(max)  NOT NULL,
-    [Apellidos] nvarchar(max)  NOT NULL
+    [nombres] nvarchar(max)  NOT NULL,
+    [apellidos] nvarchar(max)  NOT NULL
 );
 GO
 
 -- Creating table 'Examenes'
 CREATE TABLE [dbo].[Examenes] (
     [IdExamen] int IDENTITY(1,1) NOT NULL,
-    [NombreExamen] nvarchar(max)  NOT NULL,
+    [nombreExamen] nvarchar(max)  NOT NULL,
     [fecha] datetime  NOT NULL,
-    [Avance] int  NOT NULL,
-    [AlumnoIdAlumno] int  NOT NULL,
-    [NumeroDePreguntas] int  NOT NULL
+    [avance] int  NOT NULL,
+    [alumnoIdAlumno] int  NOT NULL,
+    [numeroDePreguntas] int  NOT NULL,
+    [banderaAleatorio] bit  NOT NULL,
+    [banderaCronometro] bit  NOT NULL,
+    [banderaGuardar] bit  NOT NULL,
+    [banderaReanudar] bit  NOT NULL
 );
 GO
 
@@ -108,6 +118,63 @@ CREATE TABLE [dbo].[DetalleExamenes] (
 );
 GO
 
+-- Creating table 'ArrayOrdenPreguntas'
+CREATE TABLE [dbo].[ArrayOrdenPreguntas] (
+    [IdArrayOrdenPreguntas] int IDENTITY(1,1) NOT NULL,
+    [p01] int  NOT NULL,
+    [p02] int  NOT NULL,
+    [p03] int  NOT NULL,
+    [p04] int  NOT NULL,
+    [p05] int  NOT NULL,
+    [p06] int  NOT NULL,
+    [p07] int  NOT NULL,
+    [p08] int  NOT NULL,
+    [p09] int  NOT NULL,
+    [p10] int  NOT NULL,
+    [p11] int  NOT NULL,
+    [p12] int  NOT NULL,
+    [p13] int  NOT NULL,
+    [p14] int  NOT NULL,
+    [p15] int  NOT NULL,
+    [p16] int  NOT NULL,
+    [p17] int  NOT NULL,
+    [p18] int  NOT NULL,
+    [p19] int  NOT NULL,
+    [p20] int  NOT NULL,
+    [p21] int  NOT NULL,
+    [p22] int  NOT NULL,
+    [p23] int  NOT NULL,
+    [p24] int  NOT NULL,
+    [p25] int  NOT NULL,
+    [p26] int  NOT NULL,
+    [p27] int  NOT NULL,
+    [p28] int  NOT NULL,
+    [p29] int  NOT NULL,
+    [p30] int  NOT NULL,
+    [p31] int  NOT NULL,
+    [p32] int  NOT NULL,
+    [p33] int  NOT NULL,
+    [p34] int  NOT NULL,
+    [p35] int  NOT NULL,
+    [p36] int  NOT NULL,
+    [p37] int  NOT NULL,
+    [p38] int  NOT NULL,
+    [p39] int  NOT NULL,
+    [p40] int  NOT NULL,
+    [p41] int  NOT NULL,
+    [p42] int  NOT NULL,
+    [p43] int  NOT NULL,
+    [p44] int  NOT NULL,
+    [p45] int  NOT NULL,
+    [p46] int  NOT NULL,
+    [p47] int  NOT NULL,
+    [p48] int  NOT NULL,
+    [p49] int  NOT NULL,
+    [p50] int  NOT NULL,
+    [ExamenIdExamen] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -130,14 +197,20 @@ ADD CONSTRAINT [PK_DetalleExamenes]
     PRIMARY KEY CLUSTERED ([IdDetalleExamen] ASC);
 GO
 
+-- Creating primary key on [IdArrayOrdenPreguntas] in table 'ArrayOrdenPreguntas'
+ALTER TABLE [dbo].[ArrayOrdenPreguntas]
+ADD CONSTRAINT [PK_ArrayOrdenPreguntas]
+    PRIMARY KEY CLUSTERED ([IdArrayOrdenPreguntas] ASC);
+GO
+
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [AlumnoIdAlumno] in table 'Examenes'
+-- Creating foreign key on [alumnoIdAlumno] in table 'Examenes'
 ALTER TABLE [dbo].[Examenes]
 ADD CONSTRAINT [FK_AlumnoExamen]
-    FOREIGN KEY ([AlumnoIdAlumno])
+    FOREIGN KEY ([alumnoIdAlumno])
     REFERENCES [dbo].[Alumnos]
         ([IdAlumno])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -146,7 +219,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_AlumnoExamen'
 CREATE INDEX [IX_FK_AlumnoExamen]
 ON [dbo].[Examenes]
-    ([AlumnoIdAlumno]);
+    ([alumnoIdAlumno]);
 GO
 
 -- Creating foreign key on [ExamenIdExamen] in table 'DetalleExamenes'
@@ -161,6 +234,21 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_ExamenDetalleExamen'
 CREATE INDEX [IX_FK_ExamenDetalleExamen]
 ON [dbo].[DetalleExamenes]
+    ([ExamenIdExamen]);
+GO
+
+-- Creating foreign key on [ExamenIdExamen] in table 'ArrayOrdenPreguntas'
+ALTER TABLE [dbo].[ArrayOrdenPreguntas]
+ADD CONSTRAINT [FK_ExamenArrayOrdenPreguntas]
+    FOREIGN KEY ([ExamenIdExamen])
+    REFERENCES [dbo].[Examenes]
+        ([IdExamen])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ExamenArrayOrdenPreguntas'
+CREATE INDEX [IX_FK_ExamenArrayOrdenPreguntas]
+ON [dbo].[ArrayOrdenPreguntas]
     ([ExamenIdExamen]);
 GO
 

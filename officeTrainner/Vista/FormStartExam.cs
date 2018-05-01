@@ -11,12 +11,13 @@
         public static int NUMERO_DE_PREGUNTAS = 35;
         string ExamenSeleccionado;
         //****************************************************
-        public static bool Random;
-        public static bool Cronometro;
-        public static bool Guardar;
+        public static bool aleatorio;
+        public static bool cronometro;
+        public static bool guardar;
+        public static bool reanudar;
         //****************************************************
-        public static int[] ArrayOrdenDePreguntas;
-        //int[] arrayDeAleatorios = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        public static int[] arrayOrdenDePreguntas;
+        // public static int[] arrayOrdenDePreguntas = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         #endregion
 
         public FormStartExam()
@@ -26,10 +27,7 @@
 
         #region Events
         private void BtnComenzarExamen_Click(object sender, EventArgs e)
-        {
-            GuardarParametros();
-            ArrayOrdenDePreguntas = ObteneOrdenDePreguntas(Random);
-
+        {            
             Screen screen = Screen.PrimaryScreen;
 
             //BR: el monitor actual es de 1080 X 1920
@@ -50,8 +48,8 @@
             {
                 Alumno alumno = new Alumno
                 {
-                    Nombres = TxtFirstName.Text,
-                    Apellidos = TxtLastName.Text
+                    nombres = TxtFirstName.Text,
+                    apellidos = TxtLastName.Text
                 };
                 using (ModelContainer conexion = new ModelContainer())
                 {
@@ -63,12 +61,16 @@
                 Examen examen = new Examen
                 {
                     //NombreExamen = ExamenSeleccionado,
-                    NombreExamen = "Word",
+                    nombreExamen = "Word",
                     fecha = today,
-                    Avance = 0,
-                    AlumnoIdAlumno = ObtenerUltimoIdAlumno(),
-                    NumeroDePreguntas = ObtenerNumeroDePreguntas()
-                };
+                    avance = 0,
+                    alumnoIdAlumno = ObtenerUltimoIdAlumno(),
+                    numeroDePreguntas = ObtenerNumeroDePreguntas(),
+                    banderaAleatorio = ChbOrdenPregAle.Checked,
+                    banderaCronometro = ChbCronometro.Checked,
+                    banderaGuardar = ChbGuardarResultados.Checked,
+                    banderaReanudar = false
+            };
                 using (ModelContainer conexion = new ModelContainer())
                 {
                     conexion.Examenes.Add(examen);
@@ -124,6 +126,7 @@
                 }
 
             }
+            CargarParametros();
             formQuestionsPanel.Show();
         }
 
@@ -144,11 +147,72 @@
         #endregion
 
         #region Methods
-        private void GuardarParametros()
+        private void CargarParametros()
         {
-            Random = ChbOrdenPregAle.Checked;
-            Cronometro = ChbCronometro.Checked;
-            Guardar = ChbGuardarResultados.Checked;
+                aleatorio = ChbOrdenPregAle.Checked;
+                cronometro = ChbCronometro.Checked;
+                guardar = ChbGuardarResultados.Checked;
+                arrayOrdenDePreguntas = ObteneOrdenDePreguntas(aleatorio); 
+            
+                ArrayOrdenPreguntas arrayOrdenDePreguntasO = new ArrayOrdenPreguntas
+                {
+                    p01 = arrayOrdenDePreguntas[0],
+                    p02 = arrayOrdenDePreguntas[1],
+                    p03 = arrayOrdenDePreguntas[2],
+                    p04 = arrayOrdenDePreguntas[3],
+                    p05 = arrayOrdenDePreguntas[4],
+                    p06 = arrayOrdenDePreguntas[5],
+                    p07 = arrayOrdenDePreguntas[6],
+                    p08 = arrayOrdenDePreguntas[7],
+                    p09 = arrayOrdenDePreguntas[8],
+                    p10 = arrayOrdenDePreguntas[9],
+                    p11 = arrayOrdenDePreguntas[10],
+                    p12 = arrayOrdenDePreguntas[11],
+                    p13 = arrayOrdenDePreguntas[12],
+                    p14 = arrayOrdenDePreguntas[13],
+                    p15 = arrayOrdenDePreguntas[14],
+                    p16 = arrayOrdenDePreguntas[15],
+                    p17 = arrayOrdenDePreguntas[16],
+                    p18 = arrayOrdenDePreguntas[17],
+                    p19 = arrayOrdenDePreguntas[18],
+                    p20 = arrayOrdenDePreguntas[19],
+                    p21 = arrayOrdenDePreguntas[20],
+                    p22 = arrayOrdenDePreguntas[21],
+                    p23 = arrayOrdenDePreguntas[22],
+                    p24 = arrayOrdenDePreguntas[23],
+                    p25 = arrayOrdenDePreguntas[24],
+                    p26 = arrayOrdenDePreguntas[25],
+                    p27 = arrayOrdenDePreguntas[26],
+                    p28 = arrayOrdenDePreguntas[27],
+                    p29 = arrayOrdenDePreguntas[28],
+                    p30 = arrayOrdenDePreguntas[29],
+                    p31 = arrayOrdenDePreguntas[30],
+                    p32 = arrayOrdenDePreguntas[31],
+                    p33 = arrayOrdenDePreguntas[32],
+                    p34 = arrayOrdenDePreguntas[33],
+                    p35 = arrayOrdenDePreguntas[34],
+                    p36 = arrayOrdenDePreguntas[35],
+                    p37 = arrayOrdenDePreguntas[36],
+                    p38 = arrayOrdenDePreguntas[37],
+                    p39 = arrayOrdenDePreguntas[38],
+                    p40 = arrayOrdenDePreguntas[39],
+                    p41 = arrayOrdenDePreguntas[40],
+                    p42 = arrayOrdenDePreguntas[41],
+                    p43 = arrayOrdenDePreguntas[42],
+                    p44 = arrayOrdenDePreguntas[43],
+                    p45 = arrayOrdenDePreguntas[44],
+                    p46 = arrayOrdenDePreguntas[45],
+                    p47 = arrayOrdenDePreguntas[46],
+                    p48 = arrayOrdenDePreguntas[47],
+                    p49 = arrayOrdenDePreguntas[48],
+                    p50 = arrayOrdenDePreguntas[49],
+                    ExamenIdExamen = ObtenerUltimoIdExamen()
+                };
+                using (ModelContainer conexion = new ModelContainer())
+                {
+                    conexion.ArrayOrdenPreguntas.Add(arrayOrdenDePreguntasO);
+                    conexion.SaveChanges();
+                }
         }
 
         private int[] ObteneOrdenDePreguntas(bool aleatorio) //true = aleatorio; false = no aleatorio

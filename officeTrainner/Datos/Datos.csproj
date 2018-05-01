@@ -52,6 +52,9 @@
     <Compile Include="Alumno.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ArrayOrdenPreguntas.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DetalleExamen.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
