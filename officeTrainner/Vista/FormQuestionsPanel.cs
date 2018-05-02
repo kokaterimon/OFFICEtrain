@@ -12,7 +12,8 @@ namespace Vista
     {
         #region atributes
         Screen screen = Screen.PrimaryScreen;
-        int contadorDeAvance = 0;
+        int contadorDeAvance;
+        Excel.Application ObjExcel;
         #endregion
 
         public FormQuestionsPanel()
@@ -23,6 +24,7 @@ namespace Vista
 
         private void FormQuestionsPanel_Load(object sender, EventArgs e)
         {
+            contadorDeAvance=0;
             MostrarPreguntaYEjercicio();
 
         }
@@ -38,7 +40,6 @@ namespace Vista
             
             //FormStartExam.NUMERO_DE_PREGUNTAS;
            int examenIdExamen = ObtenerUltimoIdExamen();
-
             using (ModelContainer conexion = new ModelContainer())
             {
                
@@ -55,7 +56,17 @@ namespace Vista
                     conexion.SaveChanges();                    
                 }
             }
+            
+            ObjExcel.Quit();
+
             MostrarPreguntaYEjercicio();
+        }
+
+        private void BtnReset_Click(object sender, EventArgs e)
+        {
+            ObjExcel.Quit();
+            int numeroDePregunta = FormStartExam.arrayOrdenDePreguntas[contadorDeAvance-1]; // - 1
+            AbrirEjercicioExcel(numeroDePregunta);
         }
         #endregion
 
@@ -84,13 +95,13 @@ namespace Vista
            
         }
 
-        private bool AbrirEjercicioExcel(int NumeroDePregunta)
+        private bool AbrirEjercicioExcel(int numeroDePregunta)
         {
             int WidthScreen = screen.Bounds.Width;
             int HeightScreen = screen.Bounds.Height;
             int newHeightScreen = HeightScreen - HeightScreen * 200 / 1080;            
-            Excel.Application ObjExcel = new Excel.Application();
-            string ruta = Application.StartupPath + @"\Documentos\Excel\pregunta "+ NumeroDePregunta + @"\Pregunta "+ NumeroDePregunta + @" Ejercicio.xlsx";
+            ObjExcel = new Excel.Application();
+            string ruta = Application.StartupPath + @"\Documentos\Excel\pregunta "+ numeroDePregunta + @"\Pregunta "+ numeroDePregunta + @" Ejercicio.xlsx";
             if (System.IO.File.Exists(ruta))
             {
                 ObjExcel.Visible = true;
@@ -107,14 +118,14 @@ namespace Vista
             return true;
         }
 
-        private void MostrarPregunta(int NumeroDePregunta)
+        private void MostrarPregunta(int numeroDePregunta)
         {            
             //object ObjMiss = System.Reflection.Missing.Value;
             Word.Application ObjWord = new Word.Application();
             //Document doc = new Document();
 
             //object fileName = path;
-            string ruta = Application.StartupPath + @"\Documentos\Excel\pregunta " + NumeroDePregunta + @"\Pregunta " + NumeroDePregunta + @".docx";
+            string ruta = Application.StartupPath + @"\Documentos\Excel\pregunta " + numeroDePregunta + @"\Pregunta " + numeroDePregunta + @".docx";
             object fileName = ruta;
             // Define an object to pass to the API for missing parameters
             object missing = System.Type.Missing;
