@@ -1,11 +1,13 @@
 ﻿
 namespace Vista
 {
+    using Datos;
     using System;
-    using System.Collections.Generic;
+    using System.Linq;
     using System.Windows.Forms;
     using Excel = Microsoft.Office.Interop.Excel;
     using Word = Microsoft.Office.Interop.Word;
+
     public partial class FormQuestionsPanel : Form
     {
         #region atributes
@@ -22,6 +24,7 @@ namespace Vista
         private void FormQuestionsPanel_Load(object sender, EventArgs e)
         {
             MostrarPreguntaYEjercicio();
+
         }
 
         private void BtnCerrar_Click(object sender, EventArgs e)
@@ -32,13 +35,39 @@ namespace Vista
 
         private void BtNext_Click(object sender, EventArgs e)
         {
-            MostrarPreguntaYEjercicio();
+            
             //FormStartExam.NUMERO_DE_PREGUNTAS;
+           int examenIdExamen = ObtenerUltimoIdExamen();
 
-        } 
+            using (ModelContainer conexion = new ModelContainer())
+            {
+               
+                var examen = conexion.Examenes
+                    .Where(p => p.IdExamen == examenIdExamen).
+                    FirstOrDefault();
+                if (examen == null)
+                {
+                    MessageBox.Show("No es posible actualizar un examen no registrado");
+                }
+                else
+                {
+                    examen.avance = contadorDeAvance;
+                    conexion.SaveChanges();                    
+                }
+            }
+            MostrarPreguntaYEjercicio();
+        }
         #endregion
 
         #region Methods
+        private int ObtenerUltimoIdExamen()
+        {
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                int id = conexion.Examenes.Max(u => u.IdExamen);
+                return id;
+            }
+        }
         private void MostrarPreguntaYEjercicio()
         {
             int numeroDePregunta = FormStartExam.arrayOrdenDePreguntas[contadorDeAvance];
