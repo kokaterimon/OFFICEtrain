@@ -16,5 +16,17 @@ namespace Vista
         {
             InitializeComponent();
         }
+
+        private void BtnContinueExam_Click(object sender, EventArgs e)
+        {
+            FormContinueToExam formContinueToExam = new FormContinueToExam();
+            formContinueToExam.Show();
+        }
+
+        private void BtnComenzarExamen_Click(object sender, EventArgs e)
+        {
+            FormStartExam formStartExam = new FormStartExam();
+            formStartExam.Show();
+        }
     }
 }

@@ -16,9 +16,11 @@ namespace Vista
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new FormMain());
-            Application.Run(new FormStartExam());
+            Application.Run(new FormMain());
+            //Application.Run(new FormStartExam());
             //Application.Run(new FormQuestionsPanel());
+            //Application.Run(new FormContinueToExam());
+            
         }
     }
 }

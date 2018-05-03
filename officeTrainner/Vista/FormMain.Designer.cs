@@ -30,12 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.BtnComenzarExamen = new Bunifu.Framework.UI.BunifuImageButton();
-            this.bunifuImageButton2 = new Bunifu.Framework.UI.BunifuImageButton();
+            this.BtnContinueExam = new Bunifu.Framework.UI.BunifuImageButton();
             this.BtnHerramientasAdm = new Bunifu.Framework.UI.BunifuImageButton();
             this.bunifuImageButton5 = new Bunifu.Framework.UI.BunifuImageButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.BtnComenzarExamen)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnContinueExam)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnHerramientasAdm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -53,19 +53,21 @@
             this.BtnComenzarExamen.TabIndex = 0;
             this.BtnComenzarExamen.TabStop = false;
             this.BtnComenzarExamen.Zoom = 10;
+            this.BtnComenzarExamen.Click += new System.EventHandler(this.BtnComenzarExamen_Click);
             // 
-            // bunifuImageButton2
+            // BtnContinueExam
             // 
-            this.bunifuImageButton2.BackColor = System.Drawing.Color.SeaGreen;
-            this.bunifuImageButton2.Image = ((System.Drawing.Image)(resources.GetObject("bunifuImageButton2.Image")));
-            this.bunifuImageButton2.ImageActive = null;
-            this.bunifuImageButton2.Location = new System.Drawing.Point(884, 84);
-            this.bunifuImageButton2.Name = "bunifuImageButton2";
-            this.bunifuImageButton2.Size = new System.Drawing.Size(200, 200);
-            this.bunifuImageButton2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.bunifuImageButton2.TabIndex = 1;
-            this.bunifuImageButton2.TabStop = false;
-            this.bunifuImageButton2.Zoom = 10;
+            this.BtnContinueExam.BackColor = System.Drawing.Color.SeaGreen;
+            this.BtnContinueExam.Image = ((System.Drawing.Image)(resources.GetObject("BtnContinueExam.Image")));
+            this.BtnContinueExam.ImageActive = null;
+            this.BtnContinueExam.Location = new System.Drawing.Point(884, 84);
+            this.BtnContinueExam.Name = "BtnContinueExam";
+            this.BtnContinueExam.Size = new System.Drawing.Size(200, 200);
+            this.BtnContinueExam.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.BtnContinueExam.TabIndex = 1;
+            this.BtnContinueExam.TabStop = false;
+            this.BtnContinueExam.Zoom = 10;
+            this.BtnContinueExam.Click += new System.EventHandler(this.BtnContinueExam_Click);
             // 
             // BtnHerramientasAdm
             // 
@@ -103,7 +105,7 @@
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
-            // Form1
+            // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -112,12 +114,12 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bunifuImageButton5);
             this.Controls.Add(this.BtnHerramientasAdm);
-            this.Controls.Add(this.bunifuImageButton2);
+            this.Controls.Add(this.BtnContinueExam);
             this.Controls.Add(this.BtnComenzarExamen);
-            this.Name = "Form1";
+            this.Name = "FormMain";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.BtnComenzarExamen)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnContinueExam)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnHerramientasAdm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -128,7 +130,7 @@
         #endregion
 
         private Bunifu.Framework.UI.BunifuImageButton BtnComenzarExamen;
-        private Bunifu.Framework.UI.BunifuImageButton bunifuImageButton2;
+        private Bunifu.Framework.UI.BunifuImageButton BtnContinueExam;
         private Bunifu.Framework.UI.BunifuImageButton BtnHerramientasAdm;
         private Bunifu.Framework.UI.BunifuImageButton bunifuImageButton5;
         private System.Windows.Forms.PictureBox pictureBox1;
