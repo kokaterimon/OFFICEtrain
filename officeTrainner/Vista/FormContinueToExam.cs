@@ -71,7 +71,7 @@ namespace Vista
             }
             using (ModelContainer conexion = new ModelContainer())
             {
-                this.DgvExams.DataSource = conexion.Examenes.Where(p => p.alumnoIdAlumno == idAlumno).ToList();
+                this.DgvExams.DataSource = conexion.Examenes.Where(p => p.alumnoIdAlumno == idAlumno).Where(p => p.banderaReanudar == true).ToList();
             }
             DgvExams.Visible = true;
         }

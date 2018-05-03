@@ -44,17 +44,65 @@
                 Height = HeightScreen * 200 / 1080
             };
             //Llenamos los respectivos campos de la base de datos antes de abrir la siguiente ventana
+
+
+
+            CrearNuevoAlumno();
+
+           
+            CargarParametros();
+            formQuestionsPanel.Show();
+        }
+
+        private void BtnWord_Click(object sender, EventArgs e)
+        {
+            ExamenSeleccionado = "Word";
+        }
+
+        private void BtnPowerPoint_Click(object sender, EventArgs e)
+        {
+            ExamenSeleccionado = "Power Point";
+        }
+
+        private void BtnExcel_Click(object sender, EventArgs e)
+        {
+            ExamenSeleccionado = "Excel";
+        }
+        #endregion
+
+        #region Methods
+        private void CrearNuevoAlumno()
+        {
             if (CampoValidos())
             {
-                Alumno alumno = new Alumno
+                int idAlumno = 0;
+                Alumno alumnoExiste = new Alumno
                 {
                     nombres = TxtFirstName.Text,
                     apellidos = TxtLastName.Text
                 };
+
                 using (ModelContainer conexion = new ModelContainer())
                 {
-                    conexion.Alumnos.Add(alumno);
-                    conexion.SaveChanges();
+                    alumnoExiste = conexion.Alumnos.Where(p => p.nombres == alumnoExiste.nombres).Where(p => p.apellidos == alumnoExiste.apellidos).FirstOrDefault();                    
+
+                }
+                if(alumnoExiste == null)
+                {
+                    Alumno alumno = new Alumno
+                    {
+                        nombres = TxtFirstName.Text,
+                        apellidos = TxtLastName.Text
+                    };
+                    using (ModelContainer conexion = new ModelContainer())
+                    {
+                        conexion.Alumnos.Add(alumno);
+                        conexion.SaveChanges();
+                    }
+                }
+                else
+                {
+                   idAlumno = alumnoExiste.IdAlumno;//significa que no se encontró un alumno con el mismo nombre y apellido
                 }
 
                 DateTime today = DateTime.Today;
@@ -64,13 +112,14 @@
                     nombreExamen = "Word",
                     fecha = today,
                     avance = 0,
-                    alumnoIdAlumno = ObtenerUltimoIdAlumno(),
+
+                    alumnoIdAlumno = ObtenerIdAlumno(idAlumno),
                     numeroDePreguntas = ObtenerNumeroDePreguntas(),
                     banderaAleatorio = ChbOrdenPregAle.Checked,
                     banderaCronometro = ChbCronometro.Checked,
                     banderaGuardar = ChbGuardarResultados.Checked,
                     banderaReanudar = false
-            };
+                };
                 using (ModelContainer conexion = new ModelContainer())
                 {
                     conexion.Examenes.Add(examen);
@@ -126,27 +175,8 @@
                 }
 
             }
-            CargarParametros();
-            formQuestionsPanel.Show();
         }
 
-        private void BtnWord_Click(object sender, EventArgs e)
-        {
-            ExamenSeleccionado = "Word";
-        }
-
-        private void BtnPowerPoint_Click(object sender, EventArgs e)
-        {
-            ExamenSeleccionado = "Power Point";
-        }
-
-        private void BtnExcel_Click(object sender, EventArgs e)
-        {
-            ExamenSeleccionado = "Excel";
-        }
-        #endregion
-
-        #region Methods
         private void CargarParametros()
         {
                 aleatorio = ChbOrdenPregAle.Checked;
@@ -285,6 +315,18 @@
                 int id = conexion.Alumnos.Max(u => u.IdAlumno);
                 return id;
             }
+        }
+        private int ObtenerIdAlumno(int idAlumno)
+        {
+            if(idAlumno != 0)
+            {
+                return idAlumno;
+            }
+            else
+            {
+                idAlumno = ObtenerUltimoIdAlumno();
+            }
+            return idAlumno;
         }
 
         private int ObtenerUltimoIdDetalleExamen()
