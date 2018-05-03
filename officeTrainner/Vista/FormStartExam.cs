@@ -7,8 +7,7 @@
 
     public partial class FormStartExam : Form
     {
-        #region Atributes
-        public static int NUMERO_DE_PREGUNTAS = 35;
+        #region Atributes        
         string ExamenSeleccionado;
         //****************************************************
         public static bool aleatorio;
@@ -282,7 +281,7 @@
 
         private int ObtenerNumeroDePreguntas()
         {
-            var num = NUMERO_DE_PREGUNTAS;
+            var num = FormMain.NUMERO_DE_PREGUNTAS;
             return num;
         }
         private bool CampoValidos()
@@ -304,6 +303,7 @@
             using (ModelContainer conexion = new ModelContainer())
             {
                 int id = conexion.Examenes.Max(u => u.IdExamen);
+                FormMain.idExamenActual = id;
                 return id;
             }
         }

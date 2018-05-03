@@ -75,5 +75,18 @@ namespace Vista
             }
             DgvExams.Visible = true;
         }
+
+        private void DgvExams_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void bunifuFlatButton1_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in DgvExams.SelectedRows)
+            {
+                FormMain.idExamenActual = Convert.ToInt32(row.Cells[2].Value);
+            }
+        }
     }
 }

@@ -42,8 +42,10 @@
             this.apellidos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idAlumno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgvExams = new System.Windows.Forms.DataGridView();
+            this.bunifuFlatButton1 = new Bunifu.Framework.UI.BunifuFlatButton();
             this.nombreExamen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idExamen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PnlNames.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvAlumnos)).BeginInit();
@@ -72,7 +74,7 @@
             this.BtnBack.IconVisible = false;
             this.BtnBack.IconZoom = 90D;
             this.BtnBack.IsTab = false;
-            this.BtnBack.Location = new System.Drawing.Point(59, 605);
+            this.BtnBack.Location = new System.Drawing.Point(13, 618);
             this.BtnBack.Margin = new System.Windows.Forms.Padding(4);
             this.BtnBack.Name = "BtnBack";
             this.BtnBack.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
@@ -239,12 +241,51 @@
             this.DgvExams.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvExams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nombreExamen,
-            this.fecha});
+            this.fecha,
+            this.idExamen});
             this.DgvExams.Location = new System.Drawing.Point(603, 279);
             this.DgvExams.Name = "DgvExams";
             this.DgvExams.Size = new System.Drawing.Size(358, 292);
             this.DgvExams.TabIndex = 25;
             this.DgvExams.Visible = false;
+            this.DgvExams.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvExams_CellClick);
+            // 
+            // bunifuFlatButton1
+            // 
+            this.bunifuFlatButton1.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.bunifuFlatButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.bunifuFlatButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.bunifuFlatButton1.BorderRadius = 0;
+            this.bunifuFlatButton1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.bunifuFlatButton1.ButtonText = "IR A EXAMEN >>";
+            this.bunifuFlatButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bunifuFlatButton1.DisabledColor = System.Drawing.Color.Gray;
+            this.bunifuFlatButton1.Iconcolor = System.Drawing.Color.Transparent;
+            this.bunifuFlatButton1.Iconimage = ((System.Drawing.Image)(resources.GetObject("bunifuFlatButton1.Iconimage")));
+            this.bunifuFlatButton1.Iconimage_right = null;
+            this.bunifuFlatButton1.Iconimage_right_Selected = null;
+            this.bunifuFlatButton1.Iconimage_Selected = null;
+            this.bunifuFlatButton1.IconMarginLeft = 0;
+            this.bunifuFlatButton1.IconMarginRight = 0;
+            this.bunifuFlatButton1.IconRightVisible = false;
+            this.bunifuFlatButton1.IconRightZoom = 0D;
+            this.bunifuFlatButton1.IconVisible = false;
+            this.bunifuFlatButton1.IconZoom = 90D;
+            this.bunifuFlatButton1.IsTab = false;
+            this.bunifuFlatButton1.Location = new System.Drawing.Point(1028, 618);
+            this.bunifuFlatButton1.Margin = new System.Windows.Forms.Padding(4);
+            this.bunifuFlatButton1.Name = "bunifuFlatButton1";
+            this.bunifuFlatButton1.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.bunifuFlatButton1.OnHovercolor = System.Drawing.Color.RoyalBlue;
+            this.bunifuFlatButton1.OnHoverTextColor = System.Drawing.Color.White;
+            this.bunifuFlatButton1.selected = false;
+            this.bunifuFlatButton1.Size = new System.Drawing.Size(143, 50);
+            this.bunifuFlatButton1.TabIndex = 26;
+            this.bunifuFlatButton1.Text = "IR A EXAMEN >>";
+            this.bunifuFlatButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bunifuFlatButton1.Textcolor = System.Drawing.Color.White;
+            this.bunifuFlatButton1.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuFlatButton1.Click += new System.EventHandler(this.bunifuFlatButton1_Click);
             // 
             // nombreExamen
             // 
@@ -260,12 +301,20 @@
             this.fecha.Name = "fecha";
             this.fecha.ReadOnly = true;
             // 
+            // idExamen
+            // 
+            this.idExamen.DataPropertyName = "idExamen";
+            this.idExamen.HeaderText = "idExamen";
+            this.idExamen.Name = "idExamen";
+            this.idExamen.ReadOnly = true;
+            // 
             // FormContinueToExam
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Navy;
             this.ClientSize = new System.Drawing.Size(1184, 681);
+            this.Controls.Add(this.bunifuFlatButton1);
             this.Controls.Add(this.DgvExams);
             this.Controls.Add(this.DgvAlumnos);
             this.Controls.Add(this.BtnBack);
@@ -297,8 +346,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nombres;
         private System.Windows.Forms.DataGridViewTextBoxColumn apellidos;
         private System.Windows.Forms.DataGridViewTextBoxColumn idAlumno;
+        private System.Windows.Forms.DataGridView DgvAlumnos;
+        private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButton1;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombreExamen;
         private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
-        private System.Windows.Forms.DataGridView DgvAlumnos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idExamen;
     }
 }
