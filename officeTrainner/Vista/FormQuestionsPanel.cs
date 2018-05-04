@@ -67,6 +67,12 @@ namespace Vista
         {
             //Guardar el exel. ObjExcel
             string ruta = Application.StartupPath + @"\Documentos\Temp\Ejercicio.xlsx";
+
+            if (System.IO.File.Exists(ruta))
+            {
+                System.IO.File.Delete(ruta);
+            }
+            
             wbook.SaveAs(ruta, Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing,
             false, false, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange,
             Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);

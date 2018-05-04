@@ -158,7 +158,10 @@ namespace Preguntas
                 conexion.PuntajePreguntas.Add(puntajePregunta);
                 conexion.SaveChanges();
             }
-
+            wbookAlumno.Close();
+            wbookResuelto.Close();
+            ObjExcelAlumno.Quit();
+            ObjExcelResuelto.Quit();
             //var range = wsheet.get_Range("A1:J325");
             //wsheet.ListObjects.AddEx(Excel.XlListObjectSourceType.xlSrcRange, range, Type.Missing, Microsoft.Office.Interop.Excel.XlYesNoGuess.xlYes, Type.Missing).Name = "MyTableStyle";
 
@@ -175,7 +178,78 @@ namespace Preguntas
 
         private void Pregunta2()
         {
+            //Microsoft.Office.Interop.Excel.Worksheet sheet = workbook.Sheets[1];
+
+            ObjExcelAlumno = new Excel.Application()
+            {
+                Visible = false
+            };
+            string ruta = Application.StartupPath + @"\Documentos\Temp\Ejercicio.xlsx";
+            wbookAlumno = ObjExcelAlumno.Workbooks.Open(ruta);
+            wsheetAlumno = (Excel.Worksheet)wbookAlumno.ActiveSheet;
+
+            /****Excel ejercicio resuelto****/
+            ObjExcelResuelto = new Excel.Application()
+            {
+                Visible = false
+            };
+            string rutaResuelto = Application.StartupPath + @"\Documentos\Excel\Pregunta 2\Pregunta 2 Resuelta.xlsx";
+            wbookResuelto = ObjExcelResuelto.Workbooks.Open(rutaResuelto);
+            wsheetResuelto = (Excel.Worksheet)wbookResuelto.ActiveSheet;
+
+            //use this if you want to use native Excel functions (such as index)
+            //Excel.WorksheetFunction wsFunc = ObjExcelAlumno.WorksheetFunction;
+
+            int maxCol = 13; // set maximum number of rows/columns to search
+            int maxRow = 325;
+            bool banderaSalirDelFor = false;
+            string p1 = "NO EXISTE";
+
+
+            //this is pretty slow, since it has to interact with 10,000 cells in Excel
+            // just one example of how to access and set cell values       
+            for (int col = 1; col <= maxCol; col++)
+            {
+                
+                for (int row = 1; row <= maxRow; row++)
+                {
+                    if((wsheetAlumno.Cells[row, col] as Excel.Range).Value != (wsheetResuelto.Cells[row, col] as Excel.Range).Value)
+                    {                       
+                        banderaSalirDelFor = true;
+                        p1 = "INCORRECTO";
+                        break ;
+                    }
+                }
+                if (banderaSalirDelFor)
+                    break;
+            }
+            if(!banderaSalirDelFor)
+            {               
+                p1 = "CORRECTO";
+            }
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+            wbookAlumno.Close();
+            wbookResuelto.Close();
+            ObjExcelAlumno.Quit();
+            ObjExcelResuelto.Quit();
+
         }
+   
         private void Pregunta3()
         {
         }
@@ -323,3 +397,5 @@ namespace Preguntas
         }
     }
 }
+
+
