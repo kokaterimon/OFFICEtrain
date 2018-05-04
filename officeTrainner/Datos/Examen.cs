@@ -14,6 +14,12 @@ namespace Datos
     
     public partial class Examen
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Examen()
+        {
+            this.PuntajePreguntas = new HashSet<PuntajePregunta>();
+        }
+    
         public int IdExamen { get; set; }
         public string nombreExamen { get; set; }
         public System.DateTime fecha { get; set; }
@@ -24,5 +30,8 @@ namespace Datos
         public bool banderaCronometro { get; set; }
         public bool banderaGuardar { get; set; }
         public bool banderaReanudar { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PuntajePregunta> PuntajePreguntas { get; set; }
     }
 }

@@ -10,6 +10,7 @@
     <EntitySet Name="Examenes" EntityType="Model.Store.Examenes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="DetalleExamenes" EntityType="Model.Store.DetalleExamenes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ArrayOrdenPreguntas" EntityType="Model.Store.ArrayOrdenPreguntas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PuntajePreguntas" EntityType="Model.Store.PuntajePreguntas" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="AlumnoExamen" Association="Model.Store.AlumnoExamen">
       <End Role="Alumno" EntitySet="Alumnos" />
       <End Role="Examen" EntitySet="Examenes" />
@@ -21,6 +22,10 @@
     <AssociationSet Name="ExamenArrayOrdenPreguntas" Association="Model.Store.ExamenArrayOrdenPreguntas">
       <End Role="Examen" EntitySet="Examenes" />
       <End Role="ArrayOrdenPreguntas" EntitySet="ArrayOrdenPreguntas" />
+    </AssociationSet>
+    <AssociationSet Name="PuntajePreguntaExamen" Association="Model.Store.PuntajePreguntaExamen">
+      <End Role="PuntajePregunta" EntitySet="PuntajePreguntas" />
+      <End Role="Examen" EntitySet="Examenes" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Alumnos">
@@ -150,6 +155,18 @@
     <Property Name="p50" Type="int" Nullable="false" />
     <Property Name="ExamenIdExamen" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="PuntajePreguntas">
+    <Key>
+      <PropertyRef Name="IdPuntajePreguntas" />
+    </Key>
+    <Property Name="IdPuntajePreguntas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sp1" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="sp2" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="sp3" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="sp4" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="sp5" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ExamenIdExamen" Type="int" Nullable="false" />
+  </EntityType>
   <Association Name="AlumnoExamen">
     <End Role="Alumno" Type="Model.Store.Alumnos" Multiplicity="1" />
     <End Role="Examen" Type="Model.Store.Examenes" Multiplicity="*" />
@@ -186,6 +203,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="PuntajePreguntaExamen">
+    <End Role="PuntajePregunta" Type="Model.Store.PuntajePreguntas" Multiplicity="*" />
+    <End Role="Examen" Type="Model.Store.Examenes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Examen">
+        <PropertyRef Name="IdExamen" />
+      </Principal>
+      <Dependent Role="PuntajePregunta">
+        <PropertyRef Name="ExamenIdExamen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -206,6 +235,11 @@
           <AssociationSet Name="ExamenArrayOrdenPreguntas" Association="Model.ExamenArrayOrdenPreguntas">
             <End Role="Examen" EntitySet="Examenes" />
             <End Role="ArrayOrdenPreguntas" EntitySet="ArrayOrdenPreguntas" />
+          </AssociationSet>
+          <EntitySet Name="PuntajePreguntas" EntityType="Model.PuntajePregunta" />
+          <AssociationSet Name="PuntajePreguntaExamen" Association="Model.PuntajePreguntaExamen">
+            <End Role="PuntajePregunta" EntitySet="PuntajePreguntas" />
+            <End Role="Examen" EntitySet="Examenes" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Alumno">
@@ -231,6 +265,7 @@
           <Property Name="banderaCronometro" Type="Boolean" Nullable="false" />
           <Property Name="banderaGuardar" Type="Boolean" Nullable="false" />
           <Property Name="banderaReanudar" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="PuntajePreguntas" Relationship="Model.PuntajePreguntaExamen" FromRole="Examen" ToRole="PuntajePregunta" />
         </EntityType>
         <EntityType Name="DetalleExamen">
           <Key>
@@ -372,6 +407,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PuntajePregunta">
+          <Key>
+            <PropertyRef Name="IdPuntajePreguntas" />
+          </Key>
+          <Property Name="IdPuntajePreguntas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sp1" Type="String" Nullable="false" />
+          <Property Name="sp2" Type="String" Nullable="false" />
+          <Property Name="sp3" Type="String" Nullable="false" />
+          <Property Name="sp4" Type="String" Nullable="false" />
+          <Property Name="sp5" Type="String" Nullable="false" />
+          <Property Name="ExamenIdExamen" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="PuntajePreguntaExamen">
+          <End Type="Model.PuntajePregunta" Role="PuntajePregunta" Multiplicity="*" />
+          <End Type="Model.Examen" Role="Examen" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Examen">
+              <PropertyRef Name="IdExamen" />
+            </Principal>
+            <Dependent Role="PuntajePregunta">
+              <PropertyRef Name="ExamenIdExamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -505,6 +564,19 @@
           <ScalarProperty Name="p48" ColumnName="p48" />
           <ScalarProperty Name="p49" ColumnName="p49" />
           <ScalarProperty Name="p50" ColumnName="p50" />
+          <ScalarProperty Name="ExamenIdExamen" ColumnName="ExamenIdExamen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PuntajePreguntas">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.PuntajePregunta)">
+        <MappingFragment StoreEntitySet="PuntajePreguntas">
+          <ScalarProperty Name="IdPuntajePreguntas" ColumnName="IdPuntajePreguntas" />
+          <ScalarProperty Name="sp1" ColumnName="sp1" />
+          <ScalarProperty Name="sp2" ColumnName="sp2" />
+          <ScalarProperty Name="sp3" ColumnName="sp3" />
+          <ScalarProperty Name="sp4" ColumnName="sp4" />
+          <ScalarProperty Name="sp5" ColumnName="sp5" />
           <ScalarProperty Name="ExamenIdExamen" ColumnName="ExamenIdExamen" />
         </MappingFragment>
       </EntityTypeMapping>

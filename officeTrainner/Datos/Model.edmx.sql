@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/01/2018 18:01:05
+-- Date Created: 05/03/2018 15:31:53
 -- Generated from EDMX file: C:\OFFICEtrainer\officeTrainner\Datos\Model.edmx
 -- --------------------------------------------------
 
@@ -175,6 +175,18 @@ CREATE TABLE [dbo].[ArrayOrdenPreguntas] (
 );
 GO
 
+-- Creating table 'PuntajePreguntas'
+CREATE TABLE [dbo].[PuntajePreguntas] (
+    [IdPuntajePreguntas] int IDENTITY(1,1) NOT NULL,
+    [sp1] nvarchar(max)  NOT NULL,
+    [sp2] nvarchar(max)  NOT NULL,
+    [sp3] nvarchar(max)  NOT NULL,
+    [sp4] nvarchar(max)  NOT NULL,
+    [sp5] nvarchar(max)  NOT NULL,
+    [ExamenIdExamen] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -201,6 +213,12 @@ GO
 ALTER TABLE [dbo].[ArrayOrdenPreguntas]
 ADD CONSTRAINT [PK_ArrayOrdenPreguntas]
     PRIMARY KEY CLUSTERED ([IdArrayOrdenPreguntas] ASC);
+GO
+
+-- Creating primary key on [IdPuntajePreguntas] in table 'PuntajePreguntas'
+ALTER TABLE [dbo].[PuntajePreguntas]
+ADD CONSTRAINT [PK_PuntajePreguntas]
+    PRIMARY KEY CLUSTERED ([IdPuntajePreguntas] ASC);
 GO
 
 -- --------------------------------------------------
@@ -249,6 +267,21 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_ExamenArrayOrdenPreguntas'
 CREATE INDEX [IX_FK_ExamenArrayOrdenPreguntas]
 ON [dbo].[ArrayOrdenPreguntas]
+    ([ExamenIdExamen]);
+GO
+
+-- Creating foreign key on [ExamenIdExamen] in table 'PuntajePreguntas'
+ALTER TABLE [dbo].[PuntajePreguntas]
+ADD CONSTRAINT [FK_PuntajePreguntaExamen]
+    FOREIGN KEY ([ExamenIdExamen])
+    REFERENCES [dbo].[Examenes]
+        ([IdExamen])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PuntajePreguntaExamen'
+CREATE INDEX [IX_FK_PuntajePreguntaExamen]
+ON [dbo].[PuntajePreguntas]
     ([ExamenIdExamen]);
 GO
 

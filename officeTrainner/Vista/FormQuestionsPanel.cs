@@ -7,6 +7,7 @@ namespace Vista
     using System.Windows.Forms;
     using Excel = Microsoft.Office.Interop.Excel;
     using Word = Microsoft.Office.Interop.Word;
+    using Preguntas;
 
     public partial class FormQuestionsPanel : Form
     {
@@ -15,6 +16,8 @@ namespace Vista
         int[] arrayOrdenPreguntas;
         int contadorDeAvance;
         Excel.Application ObjExcel;
+        //Excel.Worksheet wsheet;
+        Excel.Workbook wbook;
         int examenIdExamen;
         #endregion
 
@@ -41,16 +44,18 @@ namespace Vista
         }
 
         private void BtNext_Click(object sender, EventArgs e)
-        {
-            ObjExcel.Quit();
+        {            
             //FormStartExam.NUMERO_DE_PREGUNTAS;
             GuardarAvance();
             ComprobarCorrectoIncorrecto();
+            //wbook.Close();
+            ObjExcel.Quit();
             MostrarPreguntaYEjercicio();
         }
 
         private void BtnReset_Click(object sender, EventArgs e)
         {
+           // wbook.Close();
             ObjExcel.Quit();
             int numeroDePregunta = FormStartExam.arrayOrdenDePreguntas[contadorDeAvance-1]; // - 1
             AbrirEjercicioExcel(numeroDePregunta);
@@ -60,9 +65,21 @@ namespace Vista
         #region Methods
         private void ComprobarCorrectoIncorrecto()
         {
-            //Guardar el exel
-            //comparar cambio en lso archivos ejercicio y respuesta
+            //Guardar el exel. ObjExcel
+            string ruta = Application.StartupPath + @"\Documentos\Temp\Ejercicio.xlsx";
+            wbook.SaveAs(ruta, Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing,
+            false, false, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange,
+            Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+            wbook.Close();
+
+            //comparar cambio en los archivos ejercicio y respuesta
+            PreguntasExcel preguntasExcel = new PreguntasExcel();
+            preguntasExcel.Pregunta01(examenIdExamen);
+
+            //borrar documentos temporales 
+
             //guardar resultado (correcto/incorrecto) en detalleexamenes
+
         }
         private void GuardarAvance()
         {
@@ -117,7 +134,7 @@ namespace Vista
             if (System.IO.File.Exists(ruta))
             {
                 ObjExcel.Visible = true;
-                ObjExcel.Workbooks.Open(ruta);
+                wbook = ObjExcel.Workbooks.Open(ruta);
                 ObjExcel.ActiveWindow.Height = 811 * newHeightScreen / 1080;
                 ObjExcel.ActiveWindow.Width = WidthScreen;
                 ObjExcel.ActiveWindow.Left = 0;
