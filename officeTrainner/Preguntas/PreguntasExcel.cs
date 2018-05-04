@@ -14,9 +14,9 @@ namespace Preguntas
     public class PreguntasExcel
     {
         /****Excel guardado temporal****/
-        Excel.Application ObjExcel;
-        Excel.Worksheet wsheet;
-        Excel.Workbook wbook;
+        Excel.Application ObjExcelAlumno;
+        Excel.Worksheet wsheetAlumno;
+        Excel.Workbook wbookAlumno;
         /****Excel ejercicio resuelto****/
         Excel.Application ObjExcelResuelto;
         Excel.Worksheet wsheetResuelto;
@@ -27,13 +27,13 @@ namespace Preguntas
             string p1 = "NO EXISTE";
             string p2 = "NO EXISTE";
 
-            ObjExcel = new Excel.Application()
+            ObjExcelAlumno = new Excel.Application()
             {
                 Visible = false
             };
             string ruta =  Application.StartupPath + @"\Documentos\Temp\Ejercicio.xlsx";
-            wbook = ObjExcel.Workbooks.Open(ruta);
-            wsheet = (Excel.Worksheet)wbook.ActiveSheet;
+            wbookAlumno = ObjExcelAlumno.Workbooks.Open(ruta);
+            wsheetAlumno = (Excel.Worksheet)wbookAlumno.ActiveSheet;
 
             ObjExcelResuelto = new Excel.Application()
             {
@@ -44,18 +44,13 @@ namespace Preguntas
             wsheetResuelto = (Excel.Worksheet)wbookResuelto.ActiveSheet;
 
 
-            // string temp1 = wsheet.ListObjects.get_Item("Tabla1").TableStyle;
-            //var temp2 = wsheetResuelto.ListObjects.get_Item("Tabla2").TableStyle;
+            Excel.TableStyle tableStyleALumno = wsheetAlumno.ListObjects.get_Item("Tabla1").TableStyle;
+            Excel.TableStyle tableStyleResuelto = wsheetResuelto.ListObjects.get_Item("Tabla2").TableStyle;
 
-            //wsheet.ListObjects.get_Item("MyTableStyletest").TableStyle ="TableStyleMedium16";
+            Excel.Range rangeAlumno = wsheetAlumno.ListObjects.get_Item("Tabla1").Range;
+            Excel.Range rangeResuelto = wsheetAlumno.ListObjects.get_Item("Tabla1").Range;
 
-            Excel.TableStyle temp1 = wsheet.ListObjects.get_Item("Tabla1").TableStyle;
-            Excel.TableStyle temp2 = wsheetResuelto.ListObjects.get_Item("Tabla2").TableStyle;
-
-
-            //if (wsheet.ListObjects.get_Item("Tabla1").TableStyle == wsheetResuelto.ListObjects.get_Item("Tabla2").TableStyle)
-
-            if (temp1.Name == temp2.Name)
+            if (tableStyleALumno.Name == tableStyleResuelto.Name && rangeAlumno.Column == rangeAlumno.Column && rangeAlumno.Row == rangeAlumno.Row && rangeAlumno.Count == rangeAlumno.Count)
               {
                   p1 = "CORRECTO";
               }
@@ -64,7 +59,7 @@ namespace Preguntas
                   p1 = "INCORRECTO";
               }
 
-              if (wsheet.ListObjects.get_Item("Tabla1").ShowTableStyleRowStripes == false)
+              if (wsheetAlumno.ListObjects.get_Item("Tabla1").ShowTableStyleRowStripes == false)
               {
                   p2 = "CORRECTO";
               }
