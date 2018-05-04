@@ -11,6 +11,7 @@ using Datos;
 
 namespace Preguntas
 {
+
     public class PreguntasExcel
     {
         /****Excel guardado temporal****/
@@ -22,10 +23,17 @@ namespace Preguntas
         Excel.Worksheet wsheetResuelto;
         Excel.Workbook wbookResuelto;
         int idExamen;
+        /***** *********/
+        string p1 = "NO EXISTE";
+        string p2 = "NO EXISTE";
+        string p3 = "NO EXISTE";
+        string p4 = "NO EXISTE";
+        string p5 = "NO EXISTE";
 
         public void Pregunta(int numeroDePregunta, int examenIdExamen)
         {
             idExamen = examenIdExamen;
+            AbrirExcels(numeroDePregunta);
 
             switch (numeroDePregunta)
                 {
@@ -85,16 +93,14 @@ namespace Preguntas
             }
                  
         }
-        private void Pregunta1()
-        {
-            string p1 = "NO EXISTE";
-            string p2 = "NO EXISTE";
 
+        private void AbrirExcels(int numeroDePregunta)
+        {
             ObjExcelAlumno = new Excel.Application()
             {
                 Visible = false
             };
-            string ruta =  Application.StartupPath + @"\Documentos\Temp\Ejercicio.xlsx";
+            string ruta = Application.StartupPath + @"\Documentos\Temp\Ejercicio.xlsx";
             wbookAlumno = ObjExcelAlumno.Workbooks.Open(ruta);
             wsheetAlumno = (Excel.Worksheet)wbookAlumno.ActiveSheet;
 
@@ -102,11 +108,41 @@ namespace Preguntas
             {
                 Visible = false
             };
-            string rutaResuelto = Application.StartupPath + @"\Documentos\Excel\Pregunta 1\Pregunta 1 Resuelta.xlsx";
+            string rutaResuelto = Application.StartupPath + @"\Documentos\Excel\Pregunta "+ numeroDePregunta+@"\Pregunta "+ numeroDePregunta+@" Resuelta.xlsx";
             wbookResuelto = ObjExcelResuelto.Workbooks.Open(rutaResuelto);
             wsheetResuelto = (Excel.Worksheet)wbookResuelto.ActiveSheet;
+        }
 
+        private void CerrarExcels()
+        {
+            wbookAlumno.Close();
+            wbookResuelto.Close();
+            ObjExcelAlumno.Quit();
+            ObjExcelResuelto.Quit();
+        }
 
+        private void Pregunta1()
+        {
+            //string p1 = "NO EXISTE";
+            //string p2 = "NO EXISTE";
+
+            //ObjExcelAlumno = new Excel.Application()
+            //{
+            //    Visible = false
+            //};
+            //string ruta =  Application.StartupPath + @"\Documentos\Temp\Ejercicio.xlsx";
+            //wbookAlumno = ObjExcelAlumno.Workbooks.Open(ruta);
+            //wsheetAlumno = (Excel.Worksheet)wbookAlumno.ActiveSheet;
+
+            //ObjExcelResuelto = new Excel.Application()
+            //{
+            //    Visible = false
+            //};
+            //string rutaResuelto = Application.StartupPath + @"\Documentos\Excel\Pregunta 1\Pregunta 1 Resuelta.xlsx";
+            //wbookResuelto = ObjExcelResuelto.Workbooks.Open(rutaResuelto);
+            //wsheetResuelto = (Excel.Worksheet)wbookResuelto.ActiveSheet;
+
+            //AbrirExcels();
 
             if (wsheetAlumno.ListObjects.Count == 0)
             {
@@ -158,10 +194,12 @@ namespace Preguntas
                 conexion.PuntajePreguntas.Add(puntajePregunta);
                 conexion.SaveChanges();
             }
-            wbookAlumno.Close();
-            wbookResuelto.Close();
-            ObjExcelAlumno.Quit();
-            ObjExcelResuelto.Quit();
+            //wbookAlumno.Close();
+            //wbookResuelto.Close();
+            //ObjExcelAlumno.Quit();
+            //ObjExcelResuelto.Quit();
+            CerrarExcels();
+
             //var range = wsheet.get_Range("A1:J325");
             //wsheet.ListObjects.AddEx(Excel.XlListObjectSourceType.xlSrcRange, range, Type.Missing, Microsoft.Office.Interop.Excel.XlYesNoGuess.xlYes, Type.Missing).Name = "MyTableStyle";
 
@@ -178,27 +216,7 @@ namespace Preguntas
 
         private void Pregunta2()
         {
-            //Microsoft.Office.Interop.Excel.Worksheet sheet = workbook.Sheets[1];
-
-            ObjExcelAlumno = new Excel.Application()
-            {
-                Visible = false
-            };
-            string ruta = Application.StartupPath + @"\Documentos\Temp\Ejercicio.xlsx";
-            wbookAlumno = ObjExcelAlumno.Workbooks.Open(ruta);
-            wsheetAlumno = (Excel.Worksheet)wbookAlumno.ActiveSheet;
-
-            /****Excel ejercicio resuelto****/
-            ObjExcelResuelto = new Excel.Application()
-            {
-                Visible = false
-            };
-            string rutaResuelto = Application.StartupPath + @"\Documentos\Excel\Pregunta 2\Pregunta 2 Resuelta.xlsx";
-            wbookResuelto = ObjExcelResuelto.Workbooks.Open(rutaResuelto);
-            wsheetResuelto = (Excel.Worksheet)wbookResuelto.ActiveSheet;
-
-            //use this if you want to use native Excel functions (such as index)
-            //Excel.WorksheetFunction wsFunc = ObjExcelAlumno.WorksheetFunction;
+            ////Microsoft.Office.Interop.Excel.Worksheet sheet = workbook.Sheets[1];
 
             int maxCol = 13; // set maximum number of rows/columns to search
             int maxRow = 325;
@@ -243,15 +261,41 @@ namespace Preguntas
                 conexion.PuntajePreguntas.Add(puntajePregunta);
                 conexion.SaveChanges();
             }
-            wbookAlumno.Close();
-            wbookResuelto.Close();
-            ObjExcelAlumno.Quit();
-            ObjExcelResuelto.Quit();
-
+            //wbookAlumno.Close();
+            //wbookResuelto.Close();
+            //ObjExcelAlumno.Quit();
+            //ObjExcelResuelto.Quit();
+            CerrarExcels();
         }
    
         private void Pregunta3()
         {
+            var borrar = (wsheetAlumno.Cells[2, 13] as Excel.Range).Formula;
+            if ((wsheetAlumno.Cells[2, 13] as Excel.Range).Formula != (wsheetResuelto.Cells[2, 13] as Excel.Range).Formula)
+            {
+                p1 = "INCORRECTO";
+            }
+            else
+            {
+                p1 = "CORRECTO";
+            }
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+            CerrarExcels();
         }
         private void Pregunta4()
         {
