@@ -73,12 +73,11 @@ namespace Vista
             wbook.Close();
 
             //comparar cambio en los archivos ejercicio y respuesta
+            int numeroDePregunta = arrayOrdenPreguntas[contadorDeAvance-1];
             PreguntasExcel preguntasExcel = new PreguntasExcel();
-            preguntasExcel.Pregunta01(examenIdExamen);
+            preguntasExcel.Pregunta(numeroDePregunta, examenIdExamen);
 
             //borrar documentos temporales 
-
-            //guardar resultado (correcto/incorrecto) en detalleexamenes
 
         }
         private void GuardarAvance()
