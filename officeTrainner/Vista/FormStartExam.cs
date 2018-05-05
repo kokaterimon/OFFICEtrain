@@ -43,14 +43,13 @@
                 Height = HeightScreen * 200 / 1080
             };
             //Llenamos los respectivos campos de la base de datos antes de abrir la siguiente ventana
+           if(CrearNuevoAlumno())
+            {
+                CargarParametros();
+                formQuestionsPanel.Show();
+            }
 
 
-
-            CrearNuevoAlumno();
-
-           
-            CargarParametros();
-            formQuestionsPanel.Show();
         }
 
         private void BtnWord_Click(object sender, EventArgs e)
@@ -70,8 +69,8 @@
         #endregion
 
         #region Methods
-        private void CrearNuevoAlumno()
-        {
+        private bool CrearNuevoAlumno()
+        {            
             if (CampoValidos())
             {
                 int idAlumno = 0;
@@ -173,7 +172,9 @@
                     conexion.SaveChanges();
                 }
 
+                return true;
             }
+            return false;
         }
 
         private void CargarParametros()

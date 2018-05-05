@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 using Datos;
-
+using System.Diagnostics;
 
 namespace Preguntas
 {
@@ -30,8 +30,12 @@ namespace Preguntas
         string p4 = "NO EXISTE";
         string p5 = "NO EXISTE";
 
+        Process[] excelProcsOld;
+
         public void Pregunta(int numeroDePregunta, int examenIdExamen)
         {
+            excelProcsOld = Process.GetProcessesByName("EXCEL");
+
             idExamen = examenIdExamen;
             AbrirExcels(numeroDePregunta);
 
@@ -115,10 +119,36 @@ namespace Preguntas
 
         private void CerrarExcels()
         {
-            wbookAlumno.Close();
-            wbookResuelto.Close();
+            /*
+           // System.Runtime.InteropServices.Marshal.ReleaseComObject(wsheetAlumno);
+            //System.Runtime.InteropServices.Marshal.ReleaseComObject(wsheetResuelto);
+            wbookAlumno.Close(false, Type.Missing, Type.Missing);
             ObjExcelAlumno.Quit();
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(wbookAlumno);            
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(ObjExcelAlumno);
+
+            wbookResuelto.Close(false, Type.Missing, Type.Missing);
             ObjExcelResuelto.Quit();
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(wbookResuelto);  
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(ObjExcelResuelto);*/
+
+            Process[] excelProcsNew = Process.GetProcessesByName("EXCEL");
+            foreach (Process procNew in excelProcsNew)
+            {
+                int exist = 0;
+                foreach (Process procOld in excelProcsOld)
+                {
+                    if (procNew.Id == procOld.Id)
+                    {
+                        exist++;
+                    }
+                }
+                if (exist == 0)
+                {
+                    procNew.Kill();
+                }
+            }
+
         }
 
         private void Pregunta1()
@@ -302,21 +332,27 @@ namespace Preguntas
         }
         private void Pregunta5()
         {
+            CerrarExcels();
         }
         private void Pregunta6()
         {
+            CerrarExcels();
         }
         private void Pregunta7()
         {
+            CerrarExcels();
         }
         private void Pregunta8()
         {
+            CerrarExcels();
         }
         private void Pregunta9()
         {
+            CerrarExcels();
         }
         private void Pregunta10()
         {
+            CerrarExcels();
         }
         private void Pregunta11()
         {

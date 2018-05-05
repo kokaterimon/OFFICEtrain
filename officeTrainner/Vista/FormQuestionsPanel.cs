@@ -8,6 +8,7 @@ namespace Vista
     using Excel = Microsoft.Office.Interop.Excel;
     using Word = Microsoft.Office.Interop.Word;
     using Preguntas;
+    using System.Diagnostics;
 
     public partial class FormQuestionsPanel : Form
     {
@@ -19,6 +20,9 @@ namespace Vista
         //Excel.Worksheet wsheet;
         Excel.Workbook wbook;
         int examenIdExamen;
+
+        Process[] excelProcsOld;//para capturar todos los excel abiertos
+
         #endregion
 
         public FormQuestionsPanel()
@@ -29,12 +33,13 @@ namespace Vista
 
         private void FormQuestionsPanel_Load(object sender, EventArgs e)
         {
+            excelProcsOld = Process.GetProcessesByName("EXCEL");
+
             examenIdExamen = FormMain.idExamenActual;
             CargarArrayOrdenPreguntas();
             //contadorDeAvance=0;
             ObtenerContadorDeAvance();
-            MostrarPreguntaYEjercicio();
-
+            MostrarPreguntaYEjercicio();            
         }
 
         private void BtnCerrar_Click(object sender, EventArgs e)
@@ -49,8 +54,35 @@ namespace Vista
             GuardarAvance();
             ComprobarCorrectoIncorrecto();
             //wbook.Close();
-            ObjExcel.Quit();
+            //ObjExcel.Quit();
+            //CerrarExcels();
             MostrarPreguntaYEjercicio();
+        }
+
+        private void CerrarExcels()
+        {
+            /*
+            wbook.Close(false, Type.Missing, Type.Missing);
+            ObjExcel.Quit();
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(wbook);
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(ObjExcel);*/
+            
+            Process[] excelProcsNew = Process.GetProcessesByName("EXCEL");
+            foreach (Process procNew in excelProcsNew)
+            {
+                int exist = 0;
+                foreach (Process procOld in excelProcsOld)
+                {
+                    if (procNew.Id == procOld.Id)
+                    {
+                        exist++;
+                    }
+                }
+                if (exist == 0)
+                {
+                    procNew.Kill();
+                }
+            }
         }
 
         private void BtnReset_Click(object sender, EventArgs e)
@@ -73,10 +105,11 @@ namespace Vista
                 System.IO.File.Delete(ruta);
             }
             
-            wbook.SaveAs(ruta, Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing,
-            false, false, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange,
+            wbook.SaveAs(ruta, Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing,
+            false, false, Excel.XlSaveAsAccessMode.xlNoChange,
             Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
-            wbook.Close();
+            //wbook.Close();
+            CerrarExcels();
 
             //comparar cambio en los archivos ejercicio y respuesta
             int numeroDePregunta = arrayOrdenPreguntas[contadorDeAvance-1];
