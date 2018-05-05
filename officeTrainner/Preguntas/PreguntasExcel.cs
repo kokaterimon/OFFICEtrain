@@ -329,6 +329,36 @@ namespace Preguntas
         }
         private void Pregunta4()
         {
+            // (wsheetAlumno.Cells[2, 6] as Excel.Range).NumberFormat = "0.000";
+            string p1 = "CORRECTO";
+
+            for (int row = 2; row <= 26; row++)
+            {
+                if ((wsheetAlumno.Cells[row, 6] as Excel.Range).NumberFormat != (wsheetResuelto.Cells[row, 6] as Excel.Range).NumberFormat)
+                {
+                    p1 = "INCORRECTO";
+                    break;
+                }
+                
+            }  
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+
+            CerrarExcels();
         }
         private void Pregunta5()
         {
