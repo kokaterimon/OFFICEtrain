@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 using Datos;
 using System.Diagnostics;
+using System.IO;
 
 namespace Preguntas
 {
@@ -251,7 +252,7 @@ namespace Preguntas
             int maxCol = 13; // set maximum number of rows/columns to search
             int maxRow = 325;
             bool banderaSalirDelFor = false;
-            string p1 = "NO EXISTE";
+
 
 
             //this is pretty slow, since it has to interact with 10,000 cells in Excel
@@ -330,7 +331,7 @@ namespace Preguntas
         private void Pregunta4()
         {
             // (wsheetAlumno.Cells[2, 6] as Excel.Range).NumberFormat = "0.000";
-            string p1 = "CORRECTO";
+            p1 = "CORRECTO";
 
             for (int row = 2; row <= 26; row++)
             {
@@ -363,6 +364,43 @@ namespace Preguntas
         private void Pregunta5()
         {
             CerrarExcels();
+            //Descomprimir ejercicio
+            string ruta_ResTem = Application.StartupPath + @"\Documentos\Temp\";
+            string ruta_7z = Application.StartupPath + @"\Documentos\Temp\7z";
+            //string ruta_ResAlum = Application.StartupPath + @"\Documentos\Temp\xl\worksheets";
+
+            ProcessStartInfo info = new ProcessStartInfo();
+
+            info.UseShellExecute = true;
+            info.FileName = "7z.exe";
+            info.WorkingDirectory = ruta_7z;
+            info.Arguments = "x "+ruta_ResTem+"Ejercicio.xlsx"+" "+"-o"+ruta_ResTem+"Ejercicio";
+            
+            Process.Start(info);
+            string cadenaAchequear1 = "conditionalFormatting";
+            string cadenaAchequear2 = "sqref=\"J2: J325\"";
+            string cadenaAchequear3 = "type=\"aboveAverage\"";
+            String[] contenidoDeArchivo = File.ReadAllLines(Path.Combine(ruta_ResTem, @"Ejercicio\xl\worksheets\sheet1.xml"));
+            if (contenidoDeArchivo[1].Any(cadenaAchequear1.Contains) && contenidoDeArchivo[1].Any(cadenaAchequear2.Contains) && contenidoDeArchivo[1].Any(cadenaAchequear3.Contains))            
+                p1 = "CORRECTO";            
+            else
+                p1 = "INCORRECTO";
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }          
         }
         private void Pregunta6()
         {
