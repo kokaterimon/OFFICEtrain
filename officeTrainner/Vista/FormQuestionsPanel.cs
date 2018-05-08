@@ -133,13 +133,22 @@ namespace Vista
         }
         private void ObtenerContadorDeAvance()
         {
-           using (ModelContainer conexion = new ModelContainer())
+            if( FormStartExam.irAPregunta == 0)
             {
-                var examen = conexion.Examenes
-                    .Where(p => p.IdExamen == examenIdExamen).
-                    FirstOrDefault();
-                contadorDeAvance = examen.avance;
+                using (ModelContainer conexion = new ModelContainer())
+                {
+                    var examen = conexion.Examenes
+                        .Where(p => p.IdExamen == examenIdExamen).
+                        FirstOrDefault();
+                    contadorDeAvance = examen.avance;
+                }
             }
+            else
+            {
+                contadorDeAvance = FormStartExam.irAPregunta-1;
+            }
+            
+
 
         }
         private void MostrarPreguntaYEjercicio()
@@ -277,6 +286,5 @@ namespace Vista
             ObjWord.Quit();            
         }
         #endregion
-
     }
 }

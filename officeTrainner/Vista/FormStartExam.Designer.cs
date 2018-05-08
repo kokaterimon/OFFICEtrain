@@ -61,6 +61,8 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.BtnComenzarExamen = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.LblNumeroPregunta = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.PnlSelectExam.SuspendLayout();
             this.PnlSelectedExam.SuspendLayout();
@@ -634,12 +636,34 @@
             this.BtnComenzarExamen.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnComenzarExamen.Click += new System.EventHandler(this.BtnComenzarExamen_Click);
             // 
+            // LblNumeroPregunta
+            // 
+            this.LblNumeroPregunta.BorderColor = System.Drawing.Color.SeaGreen;
+            this.LblNumeroPregunta.Location = new System.Drawing.Point(124, 232);
+            this.LblNumeroPregunta.Name = "LblNumeroPregunta";
+            this.LblNumeroPregunta.Size = new System.Drawing.Size(21, 20);
+            this.LblNumeroPregunta.TabIndex = 7;
+            this.LblNumeroPregunta.Text = "0";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.White;
+            this.label10.Location = new System.Drawing.Point(-2, 228);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(120, 24);
+            this.label10.TabIndex = 7;
+            this.label10.Text = "Ir a pregunta:";
+            // 
             // FormStartExam
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Navy;
             this.ClientSize = new System.Drawing.Size(1184, 681);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.LblNumeroPregunta);
             this.Controls.Add(this.PnlOptions);
             this.Controls.Add(this.PnlNames);
             this.Controls.Add(this.PnlSelectedExam);
@@ -699,5 +723,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButton2;
+        private WindowsFormsControlLibrary1.BunifuCustomTextbox LblNumeroPregunta;
+        private System.Windows.Forms.Label label10;
     }
 }

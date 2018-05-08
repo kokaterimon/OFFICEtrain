@@ -17,7 +17,11 @@
         //****************************************************
         public static int[] arrayOrdenDePreguntas;
         // public static int[] arrayOrdenDePreguntas = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        public static int irAPregunta;
+            
         #endregion
+
+
 
         public FormStartExam()
         {
@@ -26,7 +30,9 @@
 
         #region Events
         private void BtnComenzarExamen_Click(object sender, EventArgs e)
-        {            
+        {
+            irAPregunta = Convert.ToInt32(LblNumeroPregunta.Text);
+
             Screen screen = Screen.PrimaryScreen;
 
             //BR: el monitor actual es de 1080 X 1920

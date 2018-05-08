@@ -9,6 +9,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 using Datos;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 
 namespace Preguntas
 {
@@ -152,6 +153,21 @@ namespace Preguntas
 
         }
 
+        private void BorrarTemporales()
+        {
+            string rutaEjercicio = Application.StartupPath + @"\Documentos\Temp\Ejercicio";
+            System.IO.DirectoryInfo di = new DirectoryInfo(rutaEjercicio);
+
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
+            foreach (DirectoryInfo dir in di.GetDirectories())
+            {
+                dir.Delete(true);
+            }
+        }
+
         private void Pregunta1()
         {
             //string p1 = "NO EXISTE";
@@ -292,10 +308,6 @@ namespace Preguntas
                 conexion.PuntajePreguntas.Add(puntajePregunta);
                 conexion.SaveChanges();
             }
-            //wbookAlumno.Close();
-            //wbookResuelto.Close();
-            //ObjExcelAlumno.Quit();
-            //ObjExcelResuelto.Quit();
             CerrarExcels();
         }
    
@@ -362,27 +374,39 @@ namespace Preguntas
             CerrarExcels();
         }
         private void Pregunta5()
-        {
+        {            
             CerrarExcels();
-            //Descomprimir ejercicio
+            ////Descomprimir ejercicio
+            //string ruta_ResTem = Application.StartupPath + @"\Documentos\Temp\";
+            //string ruta_7z = Application.StartupPath + @"\Documentos\Temp\7z";
+            ////string ruta_ResAlum = Application.StartupPath + @"\Documentos\Temp\xl\worksheets";
+
+            //ProcessStartInfo info = new ProcessStartInfo();
+
+            //info.UseShellExecute = true;
+            //info.FileName = "7z.exe";
+            //info.WorkingDirectory = ruta_7z;
+            //info.Arguments = "x "+ruta_ResTem+"Ejercicio.xlsx"+" "+"-o"+ruta_ResTem+"Ejercicio";
+
+            //Process.Start(info);
             string ruta_ResTem = Application.StartupPath + @"\Documentos\Temp\";
-            string ruta_7z = Application.StartupPath + @"\Documentos\Temp\7z";
-            //string ruta_ResAlum = Application.StartupPath + @"\Documentos\Temp\xl\worksheets";
 
-            ProcessStartInfo info = new ProcessStartInfo();
+            //Thread t = new Thread(new ThreadStart(DescomprimirZip));
+            //t.Start();
+            //t.Join();
+            Task task1 = Task.Factory.StartNew(() => DescomprimirZip());
+            Task.WaitAll(task1);
 
-            info.UseShellExecute = true;
-            info.FileName = "7z.exe";
-            info.WorkingDirectory = ruta_7z;
-            info.Arguments = "x "+ruta_ResTem+"Ejercicio.xlsx"+" "+"-o"+ruta_ResTem+"Ejercicio";
-            
-            Process.Start(info);
+            Thread.Sleep(2000);
+
+
             string cadenaAchequear1 = "conditionalFormatting";
-            string cadenaAchequear2 = "sqref=\"J2: J325\"";
+            string cadenaAchequear2 = "sqref=\"J2:J325\"";
             string cadenaAchequear3 = "type=\"aboveAverage\"";
             String[] contenidoDeArchivo = File.ReadAllLines(Path.Combine(ruta_ResTem, @"Ejercicio\xl\worksheets\sheet1.xml"));
-            if (contenidoDeArchivo[1].Any(cadenaAchequear1.Contains) && contenidoDeArchivo[1].Any(cadenaAchequear2.Contains) && contenidoDeArchivo[1].Any(cadenaAchequear3.Contains))            
-                p1 = "CORRECTO";            
+            if (contenidoDeArchivo[1].Contains(cadenaAchequear1) && contenidoDeArchivo[1].Contains(cadenaAchequear2) && contenidoDeArchivo[1].Contains(cadenaAchequear3))
+                //if (contenidoDeArchivo[1].Contains(cadenaAchequear1))
+                    p1 = "CORRECTO";            
             else
                 p1 = "INCORRECTO";
 
@@ -400,23 +424,164 @@ namespace Preguntas
             {
                 conexion.PuntajePreguntas.Add(puntajePregunta);
                 conexion.SaveChanges();
-            }          
+            }
+            BorrarTemporales();
         }
         private void Pregunta6()
         {
+            var borrar = (wsheetAlumno.Cells[2, 13] as Excel.Range).Formula;
+            if ((wsheetAlumno.Cells[2, 9] as Excel.Range).Formula != (wsheetResuelto.Cells[2, 9] as Excel.Range).Formula)
+            {
+                p1 = "INCORRECTO";
+            }
+            else
+            {
+                p1 = "CORRECTO";
+            }
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
             CerrarExcels();
         }
         private void Pregunta7()
         {
+            p1 = "CORRECTO";
+
+            for (int row = 2; row <= 308; row++)
+            {
+                if (!(wsheetAlumno.Cells[row, 1] as Excel.Range).Value.Equals((wsheetResuelto.Cells[row, 1] as Excel.Range).Value))
+                {
+                    p1 = "INCORRECTO";
+                    break;
+                }
+
+            }
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+
             CerrarExcels();
         }
         private void Pregunta8()
         {
-            CerrarExcels();
+            p1 = "INCORRECTO";
+            //Excel.Worksheet sheet = null;
+            foreach (Excel.Worksheet sheet in wbookAlumno.Sheets)
+            {
+                if (sheet.Name.Equals("Resumen") && wbookAlumno.Sheets.Count==3)
+                {
+                    p1 = "CORRECTO";
+                    break;
+                }
+            }
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+
+            CerrarExcels();            
         }
+
+        static void DescomprimirZip()
+        {
+            string ruta_ResTem = Application.StartupPath + @"\Documentos\Temp\";
+            string ruta_7z = Application.StartupPath + @"\Documentos\Temp\7z";            
+            ProcessStartInfo info = new ProcessStartInfo();
+            info.UseShellExecute = true;
+            info.FileName = "7z.exe";
+            info.WorkingDirectory = ruta_7z;
+            info.Arguments = "x " + ruta_ResTem + "Ejercicio.xlsx" + " " + "-o" + ruta_ResTem + "Ejercicio";
+
+            Process.Start(info);            
+        }
+
         private void Pregunta9()
         {
             CerrarExcels();
+            //Descomprimir ejercicio
+            //string ruta_ResTem = Application.StartupPath + @"\Documentos\Temp\";
+            //string ruta_7z = Application.StartupPath + @"\Documentos\Temp\7z";            
+
+            //ProcessStartInfo info = new ProcessStartInfo();
+
+            //info.UseShellExecute = true;
+            //info.FileName = "7z.exe";
+            //info.WorkingDirectory = ruta_7z;
+            //info.Arguments = "x " + ruta_ResTem + "Ejercicio.xlsx" + " " + "-o" + ruta_ResTem + "Ejercicio";
+
+            //Process.Start(info);
+            string ruta_ResTem = Application.StartupPath + @"\Documentos\Temp\";
+
+            //Thread t = new Thread(new ThreadStart(DescomprimirZip));
+            //t.Start();
+            //t.Join();
+            Task task1 = Task.Factory.StartNew(() => DescomprimirZip());
+            Task.WaitAll(task1);
+
+            Thread.Sleep(2000);
+            string cadenaAchequear1 = "a:pattFill";
+            string cadenaAchequear2 = "prst=\"horzBrick\"";
+            
+            String[] contenidoDeArchivo = File.ReadAllLines(Path.Combine(ruta_ResTem, @"Ejercicio\xl\drawings\drawing1.xml"));
+            if (contenidoDeArchivo[1].Contains(cadenaAchequear1) && contenidoDeArchivo[1].Contains(cadenaAchequear2))
+                p1 = "CORRECTO";
+            else
+                p1 = "INCORRECTO";
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+            BorrarTemporales();
         }
         private void Pregunta10()
         {
