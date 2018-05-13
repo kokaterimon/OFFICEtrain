@@ -7,6 +7,7 @@ namespace Vista
     using System.Windows.Forms;
     using Excel = Microsoft.Office.Interop.Excel;
     using Word = Microsoft.Office.Interop.Word;
+    using PowerPoint = Microsoft.Office.Interop.PowerPoint;
     using Preguntas;
     using System.Diagnostics;
 
@@ -16,10 +17,16 @@ namespace Vista
         Screen screen = Screen.PrimaryScreen;
         int[] arrayOrdenPreguntas;
         int contadorDeAvance;
+        string rutaPregunta;
+
         Excel.Application ObjExcel;
         //Excel.Worksheet wsheet;
         Excel.Workbook wbook;
+
+        PowerPoint.Application ObjPowerPoint;
+
         int examenIdExamen;
+        string ExamenSeleccionado;
 
         Process[] excelProcsOld;//para capturar todos los excel abiertos
 
@@ -35,6 +42,8 @@ namespace Vista
         {
             excelProcsOld = Process.GetProcessesByName("EXCEL");
 
+            ExamenSeleccionado = FormStartExam.ExamenSeleccionado;
+            
             examenIdExamen = FormMain.idExamenActual;
             CargarArrayOrdenPreguntas();
             //contadorDeAvance=0;
@@ -97,6 +106,24 @@ namespace Vista
         #region Methods
         private void ComprobarCorrectoIncorrecto()
         {
+            switch (ExamenSeleccionado)
+            {
+                case "Word":
+                    break;
+                case "Excel":
+                    ComprobarCorrectoIncorrectoExcel();
+                    break;
+                case "Power Point":
+                    ComprobarCorrectoIncorrectoPowerPoint();
+                    break;
+            }
+
+
+        }
+        private void ComprobarCorrectoIncorrectoExcel()
+        {
+
+
             //Guardar el exel. ObjExcel
             string ruta = Application.StartupPath + @"\Documentos\Temp\Ejercicio.xlsx";
 
@@ -104,7 +131,7 @@ namespace Vista
             {
                 System.IO.File.Delete(ruta);
             }
-            
+
             wbook.SaveAs(ruta, Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing,
             false, false, Excel.XlSaveAsAccessMode.xlNoChange,
             Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
@@ -112,11 +139,14 @@ namespace Vista
             CerrarExcels();
 
             //comparar cambio en los archivos ejercicio y respuesta
-            int numeroDePregunta = arrayOrdenPreguntas[contadorDeAvance-1];
+            int numeroDePregunta = arrayOrdenPreguntas[contadorDeAvance - 1];
             PreguntasExcel preguntasExcel = new PreguntasExcel();
             preguntasExcel.Pregunta(numeroDePregunta, examenIdExamen);
 
             //borrar documentos temporales 
+        }
+        private void ComprobarCorrectoIncorrectoPowerPoint()
+        {
 
         }
         private void GuardarAvance()
@@ -157,18 +187,40 @@ namespace Vista
             
             //int numeroDePregunta = FormStartExam.arrayOrdenDePreguntas[contadorDeAvance];
             int numeroDePregunta = arrayOrdenPreguntas[contadorDeAvance];
+            switch (ExamenSeleccionado)
+            {
+                case "Word":
+                    break;
+                case "Excel":
+                    rutaPregunta = Application.StartupPath + @"\Documentos\Excel\pregunta " + numeroDePregunta + @"\Pregunta " + numeroDePregunta + @".docx";
+                    if (!AbrirEjercicioExcel(numeroDePregunta))
+                    {
+                        contadorDeAvance++;
+                        MostrarPreguntaYEjercicio();
+                    }
+                    else
+                    {
+                        MostrarPregunta(numeroDePregunta);
+                        contadorDeAvance++;
+                    }
+                    break;
+                case "Power Point":
+                    rutaPregunta = Application.StartupPath + @"\Documentos\Power Point\pregunta " + numeroDePregunta + @"\Pregunta " + numeroDePregunta + @".docx";
 
-            if (!AbrirEjercicioExcel(numeroDePregunta))
-            {
-                contadorDeAvance++;
-                MostrarPreguntaYEjercicio();                
+
+                    if (!AbrirEjercicioPowerPoint(numeroDePregunta))
+                    {
+                        contadorDeAvance++;
+                        MostrarPreguntaYEjercicio();
+                    }
+                    else
+                    {
+                        MostrarPregunta(numeroDePregunta);
+                        contadorDeAvance++;
+                    }
+                    break;
             }
-            else
-            {
-                MostrarPregunta(numeroDePregunta);
-                contadorDeAvance++;
-            }
-           
+                      
         }
 
         private bool AbrirEjercicioExcel(int numeroDePregunta)
@@ -193,7 +245,31 @@ namespace Vista
             }
             return true;
         }
-     
+        private bool AbrirEjercicioPowerPoint(int numeroDePregunta)
+        {
+            int WidthScreen = screen.Bounds.Width;
+            int HeightScreen = screen.Bounds.Height;
+            int newHeightScreen = HeightScreen - HeightScreen * 200 / 1080;
+            ObjPowerPoint = new PowerPoint.Application();
+            PowerPoint.Presentations ppts = ObjPowerPoint.Presentations;
+
+            string ruta = Application.StartupPath + @"\Documentos\Power Point\Pregunta " + numeroDePregunta + @"\Pregunta " + numeroDePregunta + @" Ejercicio.pptx";
+            if (System.IO.File.Exists(ruta))
+            {
+                PowerPoint.Presentation ppt = ppts.Open(ruta);
+
+                ObjPowerPoint.ActiveWindow.Height = 811 * newHeightScreen / 1080;
+                ObjPowerPoint.ActiveWindow.Width = WidthScreen;
+                ObjPowerPoint.ActiveWindow.Left = 0;
+                ObjPowerPoint.ActiveWindow.Top = 0;
+            }
+            else
+            {
+                return false;
+            }
+            return true;
+        }
+
         private void CargarArrayOrdenPreguntas()
         {
 
@@ -266,9 +342,8 @@ namespace Vista
             Word.Application ObjWord = new Word.Application();
             //Document doc = new Document();
 
-            //object fileName = path;
-            string ruta = Application.StartupPath + @"\Documentos\Excel\pregunta " + numeroDePregunta + @"\Pregunta " + numeroDePregunta + @".docx";
-            object fileName = ruta;
+            //object fileName = path;            
+            object fileName = rutaPregunta;
             // Define an object to pass to the API for missing parameters
             object missing = System.Type.Missing;
             Word.Document ObjDoc = ObjWord.Documents.Open(ref fileName,

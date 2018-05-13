@@ -8,7 +8,7 @@
     public partial class FormStartExam : Form
     {
         #region Atributes        
-        string ExamenSeleccionado;
+        public static string ExamenSeleccionado;
         //****************************************************
         public static bool aleatorio;
         public static bool cronometro;
@@ -18,6 +18,8 @@
         public static int[] arrayOrdenDePreguntas;
         // public static int[] arrayOrdenDePreguntas = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         public static int irAPregunta;
+
+
             
         #endregion
 
@@ -31,6 +33,7 @@
         #region Events
         private void BtnComenzarExamen_Click(object sender, EventArgs e)
         {
+
             irAPregunta = Convert.ToInt32(LblNumeroPregunta.Text);
 
             Screen screen = Screen.PrimaryScreen;

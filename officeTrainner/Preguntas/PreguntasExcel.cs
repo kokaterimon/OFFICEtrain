@@ -536,27 +536,12 @@ namespace Preguntas
         private void Pregunta9()
         {
             CerrarExcels();
-            //Descomprimir ejercicio
-            //string ruta_ResTem = Application.StartupPath + @"\Documentos\Temp\";
-            //string ruta_7z = Application.StartupPath + @"\Documentos\Temp\7z";            
-
-            //ProcessStartInfo info = new ProcessStartInfo();
-
-            //info.UseShellExecute = true;
-            //info.FileName = "7z.exe";
-            //info.WorkingDirectory = ruta_7z;
-            //info.Arguments = "x " + ruta_ResTem + "Ejercicio.xlsx" + " " + "-o" + ruta_ResTem + "Ejercicio";
-
-            //Process.Start(info);
             string ruta_ResTem = Application.StartupPath + @"\Documentos\Temp\";
 
-            //Thread t = new Thread(new ThreadStart(DescomprimirZip));
-            //t.Start();
-            //t.Join();
             Task task1 = Task.Factory.StartNew(() => DescomprimirZip());
             Task.WaitAll(task1);
 
-            Thread.Sleep(2000);
+            Thread.Sleep(2000); //para esperar a que el zip se descomprima totalmente
             string cadenaAchequear1 = "a:pattFill";
             string cadenaAchequear2 = "prst=\"horzBrick\"";
             
@@ -586,12 +571,76 @@ namespace Preguntas
         private void Pregunta10()
         {
             CerrarExcels();
+            string ruta_ResTem = Application.StartupPath + @"\Documentos\Temp\";
+
+            Task task1 = Task.Factory.StartNew(() => DescomprimirZip());
+            Task.WaitAll(task1);
+
+            Thread.Sleep(2000); //para esperar a que el zip se descomprima totalmente
+            string cadenaAchequear1 = "tabColor";
+            string cadenaAchequear2 = "theme=\"5\"";
+            string cadenaAchequear3 = "tint=\"-0.249977111117893\""; //Con esto, probalbmente, se trabaja los otros parámetros que por ahora no comparamos
+
+            String[] contenidoDeArchivo = File.ReadAllLines(Path.Combine(ruta_ResTem, @"Ejercicio\xl\worksheets\sheet3.xml"));
+            if (contenidoDeArchivo[1].Contains(cadenaAchequear1) && contenidoDeArchivo[1].Contains(cadenaAchequear2))
+                p1 = "CORRECTO";
+            else
+                p1 = "INCORRECTO";
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+            BorrarTemporales();
         }
         private void Pregunta11()
         {
+            CerrarExcels();
+            string ruta_ResTem = Application.StartupPath + @"\Documentos\Temp\";
+
+            Task task1 = Task.Factory.StartNew(() => DescomprimirZip());
+            Task.WaitAll(task1);
+
+            Thread.Sleep(2000); //para esperar a que el zip se descomprima totalmente
+            string cadenaAchequear1 = "state=\"hidden\"";            
+
+            String[] contenidoDeArchivo = File.ReadAllLines(Path.Combine(ruta_ResTem, @"Ejercicio\xl\workbook.xml"));
+            if (contenidoDeArchivo[1].Contains(cadenaAchequear1))
+                p1 = "CORRECTO";
+            else
+                p1 = "INCORRECTO";
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+            BorrarTemporales();
         }
         private void Pregunta12()
         {
+
         }
         private void Pregunta13()
         {
