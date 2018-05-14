@@ -24,6 +24,8 @@ namespace Preguntas
         Excel.Application ObjExcelResuelto;
         Excel.Worksheet wsheetResuelto;
         Excel.Workbook wbookResuelto;
+        /****Workbook Temporal****/
+        Excel.Worksheet wsheetAlumno2;
         int idExamen;
         /***** *********/
         string p1 = "NO EXISTE";
@@ -313,7 +315,7 @@ namespace Preguntas
    
         private void Pregunta3()
         {
-            var borrar = (wsheetAlumno.Cells[2, 13] as Excel.Range).Formula;
+            //var borrar = (wsheetAlumno.Cells[2, 13] as Excel.Range).Formula;
             if ((wsheetAlumno.Cells[2, 13] as Excel.Range).Formula != (wsheetResuelto.Cells[2, 13] as Excel.Range).Formula)
             {
                 p1 = "INCORRECTO";
@@ -640,13 +642,135 @@ namespace Preguntas
         }
         private void Pregunta12()
         {
+            CerrarExcels();
+            string ruta_ResTem = Application.StartupPath + @"\Documentos\Temp\";
 
+            Task task1 = Task.Factory.StartNew(() => DescomprimirZip());
+            Task.WaitAll(task1);
+
+            Thread.Sleep(2000); //para esperar a que el zip se descomprima totalmente
+            string cadenaAchequear1 = "First Semester Report";
+            string cadenaAchequear2 = "Certificación";            
+            string cadenaAchequear3 = "<cp:revision>2</cp:revision>";
+
+            String[] contenidoDeArchivo = File.ReadAllLines(Path.Combine(ruta_ResTem, @"Ejercicio\docProps\core.xml"));
+            if (!contenidoDeArchivo[1].Contains(cadenaAchequear1) && !contenidoDeArchivo[1].Contains(cadenaAchequear2) && !contenidoDeArchivo[1].Contains(cadenaAchequear3))
+                p1 = "CORRECTO";
+            else
+                p1 = "INCORRECTO";
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+            BorrarTemporales();
         }
         private void Pregunta13()
         {
+            wsheetAlumno2 = (Excel.Worksheet)wbookAlumno.Sheets[1];
+            var temp = (wsheetAlumno2.Cells[5,3] as Excel.Range).Value;
+
+            if (temp != 54)
+            {
+                p1 = "INCORRECTO";
+            }
+            else
+            {
+                p1 = "CORRECTO";
+            }
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+            CerrarExcels();
         }
         private void Pregunta14()
         {
+            //CerrarExcels();
+            //string ruta_ResTem = Application.StartupPath + @"\Documentos\Temp\";
+
+            //Task task1 = Task.Factory.StartNew(() => DescomprimirZip());
+            //Task.WaitAll(task1);
+
+            //Thread.Sleep(2000); //para esperar a que el zip se descomprima totalmente            
+
+            //String[] contenidoDeArchivo = File.ReadAllLines(Path.Combine(ruta_ResTem, @"Ejercicio\xl\styles.xml"));
+            //String[] cadenaBuscada = File.ReadAllLines(Application.StartupPath + @"\Documentos\Excel\Pregunta 14\CadenaBuscada.txt");
+            //if (contenidoDeArchivo[1].Contains(cadenaBuscada[0]))
+            //    p1 = "CORRECTO";
+            //else
+            //    p1 = "INCORRECTO";
+
+            int maxCol = 5; // set maximum number of rows/columns to search
+            int maxRow = 13;
+            bool banderaSalirDelFor = false;
+            wsheetAlumno2 = (Excel.Worksheet)wbookAlumno.Sheets[1];
+
+
+            //this is pretty slow, since it has to interact with 10,000 cells in Excel
+            // just one example of how to access and set cell values       
+            for (int col = 1; col <= maxCol; col++)
+            {
+                for (int row = 3; row <= maxRow; row++)
+                {
+                    var temp = (wsheetAlumno2.Cells[row, col] as Excel.Range).WrapText;
+
+                    if ((wsheetAlumno2.Cells[row, col] as Excel.Range).WrapText != true)
+                    {
+                        banderaSalirDelFor = true;
+                        p1 = "INCORRECTO";
+                        break;
+                    }
+                }
+                if (banderaSalirDelFor)
+                    break;
+            }
+            if (!banderaSalirDelFor)
+            {
+                p1 = "CORRECTO";
+            }
+
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+            BorrarTemporales();
+
         }
         private void Pregunta15()
         {
