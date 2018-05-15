@@ -25,7 +25,7 @@ namespace Preguntas
         Excel.Worksheet wsheetResuelto;
         Excel.Workbook wbookResuelto;
         /****Workbook Temporal****/
-        Excel.Worksheet wsheetAlumno2;
+        //Excel.Worksheet wsheetAlumno2;
         int idExamen;
         /***** *********/
         string p1 = "NO EXISTE";
@@ -678,8 +678,8 @@ namespace Preguntas
         }
         private void Pregunta13()
         {
-            wsheetAlumno2 = (Excel.Worksheet)wbookAlumno.Sheets[1];
-            var temp = (wsheetAlumno2.Cells[5,3] as Excel.Range).Value;
+            wsheetAlumno = (Excel.Worksheet)wbookAlumno.Sheets[1];
+            var temp = (wsheetAlumno.Cells[5,3] as Excel.Range).Value;
 
             if (temp != 54)
             {
@@ -727,8 +727,7 @@ namespace Preguntas
             int maxCol = 5; // set maximum number of rows/columns to search
             int maxRow = 13;
             bool banderaSalirDelFor = false;
-            wsheetAlumno2 = (Excel.Worksheet)wbookAlumno.Sheets[1];
-
+            wsheetAlumno = (Excel.Worksheet)wbookAlumno.Sheets[1]; 
 
             //this is pretty slow, since it has to interact with 10,000 cells in Excel
             // just one example of how to access and set cell values       
@@ -736,9 +735,9 @@ namespace Preguntas
             {
                 for (int row = 3; row <= maxRow; row++)
                 {
-                    var temp = (wsheetAlumno2.Cells[row, col] as Excel.Range).WrapText;
+                    //var temp = (wsheetAlumno2.Cells[row, col] as Excel.Range).WrapText;
 
-                    if ((wsheetAlumno2.Cells[row, col] as Excel.Range).WrapText != true)
+                    if ((wsheetAlumno.Cells[row, col] as Excel.Range).WrapText != true)
                     {
                         banderaSalirDelFor = true;
                         p1 = "INCORRECTO";
@@ -773,10 +772,38 @@ namespace Preguntas
 
         }
         private void Pregunta15()
-        {
+        {           
+            
         }
         private void Pregunta16()
         {
+            p1 = "INCORRECTO";
+            var contador = wbookAlumno.Sheets.Count;
+            if (contador == 3)
+            {
+                var nombre = wbookAlumno.Sheets[3].Name;
+                if (nombre == "Calificaciones (2)")
+                {
+                    p1 = "CORRECTO";
+                }               
+            }
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+            BorrarTemporales();
         }
         private void Pregunta17()
         {
