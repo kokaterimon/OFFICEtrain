@@ -807,12 +807,90 @@ namespace Preguntas
         }
         private void Pregunta17()
         {
+            wsheetAlumno = (Excel.Worksheet)wbookAlumno.Sheets[1];
+            int maxCol = 8; // set maximum number of rows/columns to search
+            int maxRow = 13;
+            bool banderaSalirDelFor = false;
+
+            //this is pretty slow, since it has to interact with 10,000 cells in Excel
+            // just one example of how to access and set cell values     
+            var temp = (wsheetAlumno.Cells[4, 5] as Excel.Range).FormatConditions.GetType();
+            for (int col = 5; col <= maxCol; col++)
+            {
+
+                for (int row = 3; row <= maxRow; row++)
+                {
+                    if ((wsheetAlumno.Cells[row, col] as Excel.Range).Value != (wsheetResuelto.Cells[row, col] as Excel.Range).Value)
+                    {
+                        banderaSalirDelFor = true;
+                        p1 = "INCORRECTO";
+                        break;
+                    }
+                }
+                if (banderaSalirDelFor)
+                    break;
+            }
+            if (!banderaSalirDelFor)
+            {
+                p1 = "CORRECTO";
+            }
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+            BorrarTemporales();
+
         }
         private void Pregunta18()
-        {
+        {   
+
         }
         private void Pregunta19()
         {
+
+            wsheetAlumno = (Excel.Worksheet)wbookAlumno.Sheets[2];
+
+            Excel.Range range = wsheetAlumno.get_Range("A3:F8");
+            //var tempo = wsheetAlumno.ListObjects.get_Item("Table1").TableStyle.Name;
+            p1 = "INCORRECTO";
+
+            foreach (Excel.ListObject obj in wsheetAlumno.ListObjects)
+            {
+                Excel.Range rangeAlumno = wsheetAlumno.ListObjects.get_Item(obj.Name).Range;
+                if (obj.TableStyle.Name == "TableStyleMedium1" && rangeAlumno.Column == range.Column && rangeAlumno.Row == range.Row && rangeAlumno.Count == range.Count)
+                {
+                    p1 = "CORRECTO";
+                }
+            }
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+            BorrarTemporales();
         }
 
         private void Pregunta20()
