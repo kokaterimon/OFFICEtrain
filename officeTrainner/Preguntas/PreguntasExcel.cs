@@ -999,9 +999,57 @@ namespace Preguntas
         }
         private void Pregunta23()
         {
+            wsheetAlumno = (Excel.Worksheet)wbookAlumno.Sheets[1];            
+            p1 = "INCORRECTO";
+
+            if ((wsheetAlumno.Cells[1, 7] as Excel.Range).Formula == "=SUMIF(C5:C41,\"Importado\",F5:F41)")
+            {
+              p1 = "CORRECTO";                    
+            }         
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+            BorrarTemporales();
         }
         private void Pregunta24()
         {
+            wsheetAlumno = (Excel.Worksheet)wbookAlumno.Sheets[1];
+            p1 = "INCORRECTO";
+
+            if ((wsheetAlumno.Cells[1, 7] as Excel.Range).Formula == "=COUNTIF(B5:B41,\"Cocina\")")
+            {
+                p1 = "CORRECTO";
+            }
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+            BorrarTemporales();
         }
         private void Pregunta25()
         {
