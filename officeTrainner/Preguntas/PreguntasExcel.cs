@@ -854,12 +854,16 @@ namespace Preguntas
 
         }
         private void Pregunta18()
-        {   
+        {
+            //wsheetAlumno = (Excel.Worksheet)wbookAlumno.Sheets[1];
+
+            //Excel.Range range = wsheetAlumno.get_Range("A3:F8");
+            //var temp = range.Interior.ThemeColor;
+            //p1 = "INCORRECTO";
 
         }
         private void Pregunta19()
         {
-
             wsheetAlumno = (Excel.Worksheet)wbookAlumno.Sheets[2];
 
             Excel.Range range = wsheetAlumno.get_Range("A3:F8");
@@ -895,12 +899,103 @@ namespace Preguntas
 
         private void Pregunta20()
         {
+            //p1 = "INCORRECTO";
+            //wsheetAlumno = (Excel.Worksheet)wbookAlumno.Sheets[1];
+
+            //Excel.ChartObjects objs = (Excel.ChartObjects)wsheetAlumno.ChartObjects(Type.Missing);
+            //MessageBox.Show(objs.Count.ToString());
+
+            //foreach (Excel.ChartObject obj in objs)
+            //{                
+            //    MessageBox.Show(obj.Chart.ChartTitle.Caption);
+            //}
+
+
+
+
+            //Microsoft.Office.Interop.Excel.ChartObject obj = objs.Item(1);
+            ////Get the chartTitle
+            //string chartTitle = obj.Chart.ChartTitle.Caption;
+            //MessageBox.Show(chartTitle);
+      
+
+
+
+            //var charts = wsheetAlumno.ChartObjects() as Excel.ChartObjects;
+            //var chart = charts.;
+
+            //foreach (Excel.ChartObject obj in wsheetAlumno.ChartObjects())
+            //{
+            //    //MessageBox.Show(obj.TableStyle.Name);
+            //    MessageBox.Show(obj.Chart.ChartTitle.Caption);
+            //}
         }
         private void Pregunta21()
         {
+            wsheetAlumno = (Excel.Worksheet)wbookAlumno.Sheets[3];            
+            int maxRow = 27;            
+            p1 = "CORRECTO";
+  
+            //var temp = (wsheetAlumno.Cells[4, 5] as Excel.Range).FormatConditions.GetType();
+                for (int row = 4; row <= maxRow; row++)
+                {
+                    if ((wsheetAlumno.Cells[row, 4] as Excel.Range).Formula != (wsheetResuelto.Cells[row, 4] as Excel.Range).Formula)
+                    {                        
+                        p1 = "INCORRECTO";
+                        break;
+                    }
+                }
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+            BorrarTemporales();
+
         }
         private void Pregunta22()
         {
+            wsheetAlumno = (Excel.Worksheet)wbookAlumno.Sheets[1];
+            int maxRow = 41;
+            p1 = "CORRECTO";
+
+            //var temp = (wsheetAlumno.Cells[4, 5] as Excel.Range).FormatConditions.GetType();
+            for (int row = 5; row <= maxRow; row++)
+            {
+                if ((wsheetAlumno.Cells[row, 2] as Excel.Range).Value != (wsheetResuelto.Cells[row, 2] as Excel.Range).Value)
+                {
+                    p1 = "INCORRECTO";
+                    break;
+                }
+            }
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+            BorrarTemporales();
         }
         private void Pregunta23()
         {
