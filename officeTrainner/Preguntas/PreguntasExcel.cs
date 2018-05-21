@@ -654,7 +654,7 @@ namespace Preguntas
             string cadenaAchequear3 = "<cp:revision>2</cp:revision>";
 
             String[] contenidoDeArchivo = File.ReadAllLines(Path.Combine(ruta_ResTem, @"Ejercicio\docProps\core.xml"));
-            if (!contenidoDeArchivo[1].Contains(cadenaAchequear1) && !contenidoDeArchivo[1].Contains(cadenaAchequear2) && !contenidoDeArchivo[1].Contains(cadenaAchequear3))
+            if (contenidoDeArchivo[1].Contains(cadenaAchequear1) && contenidoDeArchivo[1].Contains(cadenaAchequear2) && contenidoDeArchivo[1].Contains(cadenaAchequear3))
                 p1 = "CORRECTO";
             else
                 p1 = "INCORRECTO";
@@ -1053,15 +1053,84 @@ namespace Preguntas
         }
         private void Pregunta25()
         {
+            CerrarExcels();
+            p1 = "INCORRECTO";
+            string temp = "INCORRECTO";
+
+            string ruta_ResTem = Application.StartupPath + @"\Documentos\Temp\";
+
+            Task task1 = Task.Factory.StartNew(() => DescomprimirZip());
+            Task.WaitAll(task1);
+
+            Thread.Sleep(2000); //para esperar a que el zip se descomprima totalmente
+            string cadenaAchequear1 = "rowBreaks count=\"3\"";            
+
+            String[] contenidoDeArchivo = File.ReadAllLines(Path.Combine(ruta_ResTem, @"Ejercicio\xl\worksheets\sheet1.xml"));
+            if (contenidoDeArchivo[1].Contains(cadenaAchequear1))
+                temp = "CORRECTO";
+
+            //Ahora falta hacer las otras verificaciones
+            wsheetAlumno = (Excel.Worksheet)wbookAlumno.Sheets[1];
+            if ((wsheetAlumno.Cells[19, 5] as Excel.Range).Formula == "=SUBTOTAL(9,E5:E18)"
+                && (wsheetAlumno.Cells[29, 5] as Excel.Range).Formula == "=SUBTOTAL(9,E20:E28)"
+                && (wsheetAlumno.Cells[44, 5] as Excel.Range).Formula == "=SUBTOTAL(9,E30:E43)"
+                && (wsheetAlumno.Cells[45, 5] as Excel.Range).Formula == "=SUBTOTAL(9,E5:E43)"
+                && temp == "CORRECTO")
+            {
+                p1 = "CORRECTO";
+            }
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+            BorrarTemporales();
+
         }
         private void Pregunta26()
         {
         }
         private void Pregunta27()
         {
+            wsheetAlumno = (Excel.Worksheet)wbookAlumno.Sheets[1];
+            p1 = "INCORRECTO";
+
+            if ((wsheetAlumno.Cells[14, 13] as Excel.Range).Formula == "=SUBTOTAL(109,[Dic])")
+            {
+                p1 = "CORRECTO";
+            }
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+            BorrarTemporales();
         }
         private void Pregunta28()
         {
+
         }
         private void Pregunta29()
         {
