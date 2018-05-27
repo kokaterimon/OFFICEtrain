@@ -1327,9 +1327,42 @@ namespace Preguntas
         }
         private void Pregunta34()
         {
+
         }
         private void Pregunta35()
         {
+            CerrarExcels();
+            p1 = "INCORRECTO";
+            string ruta_ResTem = Application.StartupPath + @"\Documentos\Temp\";
+
+            Task task1 = Task.Factory.StartNew(() => DescomprimirZip());
+            Task.WaitAll(task1);
+
+            Thread.Sleep(2000); //para esperar a que el zip se descomprima totalmente
+            string cadenaAchequear1 = "(Calificaciones!$C$4:$D$8,Calificaciones!$C$9:$D$13)";
+            string cadenaAchequear2 = "(Calificaciones!$E$4:$E$8,Calificaciones!$E$9:$E$13)";
+
+            String[] contenidoDeArchivo = File.ReadAllLines(Path.Combine(ruta_ResTem, @"Ejercicio\xl\charts\chart1.xml"));
+            if (contenidoDeArchivo[1].Contains(cadenaAchequear1)
+                && contenidoDeArchivo[1].Contains(cadenaAchequear2))
+                p1 = "CORRECTO";
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+            BorrarTemporales();
         }
         private void Pregunta36()
         {
