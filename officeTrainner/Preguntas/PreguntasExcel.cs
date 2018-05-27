@@ -1130,22 +1130,200 @@ namespace Preguntas
         }
         private void Pregunta28()
         {
+            CerrarExcels(); 
+            p1 = "INCORRECTO";
+            string ruta_ResTem = Application.StartupPath + @"\Documentos\Temp\";
 
+            Task task1 = Task.Factory.StartNew(() => DescomprimirZip());
+            Task.WaitAll(task1);
+
+            Thread.Sleep(2000); //para esperar a que el zip se descomprima totalmente
+            string cadenaAchequear1 = "Ventas!$A$4";
+            string cadenaAchequear2 = "Ventas!$A$5";
+            string cadenaAchequear3 = "Ventas!$A$6";
+            string cadenaAchequear4 = "Ventas!$A$7";
+            string cadenaAchequear5 = "Ventas!$A$8";
+            string cadenaAchequear6 = "Ventas!$A$9";
+            string cadenaAchequear7 = "Ventas!$A$10";
+            string cadenaAchequear8 = "Ventas!$A$11";
+            string cadenaAchequear9 = "Ventas!$A$12";
+            string cadenaAchequear10 = "Ventas!$A$13";
+
+            string cadenaAchequear11 = "Ventas!$B$3:$D$3";
+
+            String[] contenidoDeArchivo = File.ReadAllLines(Path.Combine(ruta_ResTem, @"Ejercicio\xl\charts\chart1.xml"));
+            if (contenidoDeArchivo[1].Contains(cadenaAchequear1) 
+                && contenidoDeArchivo[1].Contains(cadenaAchequear2) 
+                && contenidoDeArchivo[1].Contains(cadenaAchequear3)
+                && contenidoDeArchivo[1].Contains(cadenaAchequear4)
+                && contenidoDeArchivo[1].Contains(cadenaAchequear5)
+                && contenidoDeArchivo[1].Contains(cadenaAchequear6)
+                && contenidoDeArchivo[1].Contains(cadenaAchequear7)
+                && contenidoDeArchivo[1].Contains(cadenaAchequear8)
+                && contenidoDeArchivo[1].Contains(cadenaAchequear9)
+                && contenidoDeArchivo[1].Contains(cadenaAchequear10)
+                && contenidoDeArchivo[1].Contains(cadenaAchequear11))
+                p1 = "CORRECTO";
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+            BorrarTemporales();
+
+
+            /******************************ESTO DE ABAJO SÍ FUNCIONA**********************************/
+            //var charts = wsheetAlumno.ChartObjects() as Excel.ChartObjects;
+            //var chart = charts. Item(1);
+            //MessageBox.Show(chart.ChartTitle.ToString());  
+
+            //foreach (Excel.ChartObject obj in wsheetAlumno.ChartObjects())
+            //{
+            //    //MessageBox.Show(obj.TableStyle.Name);
+            //    MessageBox.Show(obj.Chart.ChartTitle.Caption);
+            //}
         }
         private void Pregunta29()
         {
+            wsheetAlumno = (Excel.Worksheet)wbookAlumno.Sheets[1];
+            p1 = "INCORRECTO";
+
+            foreach (Excel.ChartObject obj in wsheetAlumno.ChartObjects())
+            {
+                if(obj.Chart.HasLegend == true)
+                    if(obj.Chart.Legend.Name == "Legend")
+                        p1 = "CORRECTO";
+            }
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+            BorrarTemporales();
         }
         private void Pregunta30()
         {
+
         }
         private void Pregunta31()
         {
+            CerrarExcels();
+            p1 = "INCORRECTO";
+            string ruta_ResTem = Application.StartupPath + @"\Documentos\Temp\";
+
+            Task task1 = Task.Factory.StartNew(() => DescomprimirZip());
+            Task.WaitAll(task1);
+
+            Thread.Sleep(2000); //para esperar a que el zip se descomprima totalmente
+            string cadenaAchequear1 = "Target=\"../media/image1.png\"";
+            string cadenaAchequear2 = "Target=\"http://www.uanl.mx";
+            string cadenaAchequear3 = "TargetMode=\"External\"";
+
+            String[] contenidoDeArchivo = File.ReadAllLines(Path.Combine(ruta_ResTem, @"Ejercicio\xl\drawings\_rels\drawing1.xml.rels"));
+            if (contenidoDeArchivo[1].Contains(cadenaAchequear1)
+                && contenidoDeArchivo[1].Contains(cadenaAchequear2)
+                && contenidoDeArchivo[1].Contains(cadenaAchequear3))
+                p1 = "CORRECTO";
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+            BorrarTemporales();
         }
         private void Pregunta32()
         {
+            CerrarExcels();
+            p1 = "INCORRECTO";
+            string ruta_ResTem = Application.StartupPath + @"\Documentos\Temp\";
+
+            Task task1 = Task.Factory.StartNew(() => DescomprimirZip());
+            Task.WaitAll(task1);
+
+            Thread.Sleep(2000); //para esperar a que el zip se descomprima totalmente
+            string cadenaAchequear1 = "showFormulas=\"1\"";
+
+            String[] contenidoDeArchivo = File.ReadAllLines(Path.Combine(ruta_ResTem, @"Ejercicio\xl\worksheets\sheet2.xml"));
+            if (contenidoDeArchivo[1].Contains(cadenaAchequear1))
+                p1 = "CORRECTO";
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+            BorrarTemporales();
         }
         private void Pregunta33()
         {
+            wsheetAlumno = (Excel.Worksheet)wbookAlumno.Sheets[2];            
+
+            p1 = "INCORRECTO";
+
+            if (wsheetAlumno.Visible == Excel.XlSheetVisibility.xlSheetVisible)
+            {
+                p1 = "CORRECTO";
+            }
+
+            PuntajePregunta puntajePregunta = new PuntajePregunta
+            {
+                sp1 = p1,
+                sp2 = "NO EXISTE",
+                sp3 = "NO EXISTE",
+                sp4 = "NO EXISTE",
+                sp5 = "NO EXISTE",
+                ExamenIdExamen = idExamen
+            };
+
+            using (ModelContainer conexion = new ModelContainer())
+            {
+                conexion.PuntajePreguntas.Add(puntajePregunta);
+                conexion.SaveChanges();
+            }
+            BorrarTemporales();
         }
         private void Pregunta34()
         {
