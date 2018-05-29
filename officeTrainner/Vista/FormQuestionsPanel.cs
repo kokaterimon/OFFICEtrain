@@ -10,6 +10,7 @@ namespace Vista
     using PowerPoint = Microsoft.Office.Interop.PowerPoint;
     using Preguntas;
     using System.Diagnostics;
+    using System.IO;
 
     public partial class FormQuestionsPanel : Form
     {
@@ -222,9 +223,39 @@ namespace Vista
             }
                       
         }
+        private void CopiarDatosParaPregunta17()
+        {
+            string fileName = "Alumnado.txt";
+            string sourcePath = Application.StartupPath + @"\Documentos\Excel\Pregunta 17";
+            string targetPath = @"C:\OfficeTrainner";
+            string sourceFile = System.IO.Path.Combine(sourcePath, fileName);
+            string destFile = System.IO.Path.Combine(targetPath, fileName);
 
+            if (!System.IO.Directory.Exists(targetPath))
+            {
+                System.IO.Directory.CreateDirectory(targetPath);
+            }
+
+            // To copy a file to another location and 
+            // overwrite the destination file if it already exists.
+            if (System.IO.Directory.Exists(sourcePath))
+            {
+                if (System.IO.File.Exists(destFile))
+                {
+                    File.SetAttributes(destFile, FileAttributes.Normal);
+                    System.IO.File.Delete(destFile);
+                }
+                System.IO.File.Copy(sourceFile, destFile, true);
+                File.SetAttributes(destFile, FileAttributes.Normal);
+            }
+        }
         private bool AbrirEjercicioExcel(int numeroDePregunta)
         {
+            if(numeroDePregunta == 17)
+            {
+                CopiarDatosParaPregunta17();
+            }
+
             int WidthScreen = screen.Bounds.Width;
             int HeightScreen = screen.Bounds.Height;
             int newHeightScreen = HeightScreen - HeightScreen * 200 / 1080;            
